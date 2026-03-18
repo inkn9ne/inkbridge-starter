@@ -24,10 +24,42 @@ export default function Home() {
             <ThemeToggles />
           </div>
           <h1 className="text-3xl font-semibold tracking-tight">Inkhouse Starter</h1>
-          <p className="text-muted-foreground max-w-md">
-            Open Figma Desktop → Plugins → Inkhouse → <strong>Generate Design System Page</strong> to render these components as native Figma frames.
+          <p className="text-muted-foreground max-w-lg">
+            A pre-configured Next.js + Tailwind + Storybook project wired up with Inkhouse. Follow the steps below to generate a pixel-accurate design system in Figma from these components.
           </p>
-          <div className="flex gap-2 pt-1">
+
+          <ol className="mt-2 flex flex-col gap-4">
+            {[
+              {
+                title: "Start the dev server",
+                description: <>Run <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">pnpm figma:dev</code> in your terminal. This starts the Next.js server that the plugin uses to scan components and patch tokens.</>,
+              },
+              {
+                title: "Load the plugin in Figma Desktop",
+                description: <>Go to <strong>Plugins → Development → Import plugin from manifest</strong> and select <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">node_modules/inkhouse/manifest.json</code>. Only needed once per project.</>,
+              },
+              {
+                title: "Generate your design system",
+                description: <>Open any Figma file and run <strong>Plugins → Inkhouse → Generate Design System Page</strong>. The plugin scans your Storybook stories and renders every component as a native Figma frame.</>,
+              },
+              {
+                title: "Edit tokens and push to code",
+                description: <>Change colors or styles in Figma Variables, then use <strong>Push to Code</strong> to open a GitHub PR with the updated token file — no copy-pasting needed.</>,
+              },
+            ].map((step, i) => (
+              <li key={i} className="flex gap-4">
+                <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                  {i + 1}
+                </span>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium">{step.title}</span>
+                  <span className="text-sm text-muted-foreground">{step.description}</span>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="flex gap-2 pt-2">
             <Button size="sm">Get started</Button>
             <Button size="sm" variant="outline">View docs</Button>
           </div>
