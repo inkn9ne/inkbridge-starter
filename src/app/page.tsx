@@ -112,24 +112,37 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle>Card title</CardTitle>
-                <CardDescription>A short description of this card.</CardDescription>
+                <CardTitle>Design system synced</CardTitle>
+                <CardDescription>Last synced 2 minutes ago</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Card body content goes here.</p>
+                <div className="flex gap-6">
+                  <div>
+                    <p className="text-2xl font-bold">42</p>
+                    <p className="text-xs text-muted-foreground">Components</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">128</p>
+                    <p className="text-xs text-muted-foreground">Tokens</p>
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">6</p>
+                    <p className="text-xs text-muted-foreground">Themes</p>
+                  </div>
+                </div>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle>Pro plan</CardTitle>
-                <CardDescription>Everything you need to ship faster.</CardDescription>
+                <CardTitle>Push to Figma</CardTitle>
+                <CardDescription>Render your components as native Figma frames.</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-3xl font-bold">$29<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+                <p className="text-sm text-muted-foreground">Open the Inkhouse plugin in Figma Desktop and run <strong className="text-foreground">Generate Design System Page</strong> to sync.</p>
               </CardContent>
               <CardFooter className="gap-2">
-                <Button size="sm" className="flex-1">Get started</Button>
-                <Button size="sm" variant="outline">Learn more</Button>
+                <Button size="sm" className="flex-1">Open docs</Button>
+                <Button size="sm" variant="outline">View plugin</Button>
               </CardFooter>
             </Card>
           </div>
