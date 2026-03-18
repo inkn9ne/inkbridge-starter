@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggles } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <Badge variant="secondary">Starter template</Badge>
-            <ThemeToggle />
+            <ThemeToggles />
           </div>
           <h1 className="text-3xl font-semibold tracking-tight">Inkhouse Starter</h1>
           <p className="text-muted-foreground max-w-md">

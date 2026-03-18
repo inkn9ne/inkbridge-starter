@@ -103,7 +103,7 @@
   --sidebar-ring: oklch(0.62 0.17 149.21);
 }
 
-/* ─── Theme: Secondary (blue primary, inkhouse secondary brand) ─── */
+/* ─── Theme: Secondary brand (blue primary, inkhouse secondary) — works in both light and dark ─── */
 .secondary {
   --radius: 1rem;
   --background: oklch(1 0 0);
