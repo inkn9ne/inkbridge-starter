@@ -72,7 +72,7 @@ The plugin scans your Storybook stories and builds a "Design System" page with a
 2. Add a `.stories.tsx` file alongside it
 3. Re-run **Generate Design System Page** — it always reflects the current state
 
-See [inkbridge.io/docs](https://inkbridge.io/docs) for full documentation.
+See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs) for full documentation.
 
 ---
 
