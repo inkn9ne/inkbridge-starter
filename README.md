@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inkhouse Starter
 
-## Getting Started
+A minimal Next.js + Tailwind CSS + Storybook project pre-configured with [Inkhouse](https://inkhouse.io) — so you can generate a pixel-accurate design system in Figma in minutes, without writing any components first.
 
-First, run the development server:
+## What's included
+
+- **Next.js 15** (App Router, TypeScript)
+- **Tailwind CSS v4** + shadcn/ui components
+- **Storybook** with stories for every component
+- **Inkhouse** pre-wired — scanner route, token patch route, and scripts ready to go
+
+### Demo components
+
+| Component | Type |
+|---|---|
+| Button | CVA variants (default / secondary / outline / ghost / destructive / link) + sizes |
+| Card | Compound (header / title / description / content / footer) |
+| Badge | CVA variants |
+| Input | States (default / disabled / invalid) |
+| Alert | CVA variants (default / destructive) |
+| Gradient Showcase | Gradient rendering demo (linear / radial / 3-stop / blob) |
+
+---
+
+## Quick start
+
+### Prerequisites
+
+- [Figma Desktop](https://www.figma.com/downloads/) (not browser — needs localhost access)
+- Node.js 18+ and pnpm
+
+### 1. Use this template
+
+Click **"Use this template"** → **"Create a new repository"** on GitHub, then clone your new repo.
+
+Or clone directly to try it out locally:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/inkn9ne/inkhouse-starter.git
+cd inkhouse-starter
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Load the plugin in Figma Desktop
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Open Figma Desktop
+2. Go to **Plugins → Development → Import plugin from manifest...**
+3. Select the file at:
+   ```
+   node_modules/inkhouse/manifest.json
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Figma remembers this path — you only do this once per project.
 
-## Learn More
+### 3. Start the dev server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm figma:dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Generate your design system
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+In Figma: **Plugins → Development → Inkhouse → Generate Design System Page**
 
-## Deploy on Vercel
+The plugin scans your Storybook stories and builds a "Design System" page with all components rendered as native Figma frames.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Adding your own components
+
+1. Create a component in `src/components/`
+2. Add a `.stories.tsx` file alongside it
+3. Re-run **Generate Design System Page** — it always reflects the current state
+
+See [inkhouse.io/docs](https://inkhouse.io/docs) for full documentation.
+
+---
+
+## Scripts
+
+| Script | What it does |
+|---|---|
+| `pnpm figma:dev` | Start Next.js dev server (required for plugin) |
+| `pnpm figma:scan` | Manually run the component scanner |
+| `pnpm dev` | Start Next.js normally |
+| `pnpm storybook` | Start Storybook |
+
+---
+
+## Configuration
+
+Edit `inkhouse.config.json` to control which paths the scanner searches:
+
+```json
+{
+  "componentPaths": ["src"],
+  "exclude": ["stories", "storybook-static"],
+  "onlyWithStories": true
+}
+```
+
+---
+
+## License
+
+MIT
