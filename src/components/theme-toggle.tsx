@@ -69,8 +69,8 @@ export function ThemeToggles() {
       </Button>
       <Switcher
         options={[
-          { value: "primary", label: "Green" },
-          { value: "secondary", label: "Blue" },
+          { value: "primary", label: "Primary" },
+          { value: "secondary", label: "Secondary" },
         ]}
         value={brand}
         onChange={(v) => setBrand(v as "primary" | "secondary")}
