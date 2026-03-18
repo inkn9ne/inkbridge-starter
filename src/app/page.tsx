@@ -24,16 +24,16 @@ export default function Home() {
             <ThemeToggles />
           </div>
           <div className="flex items-center gap-3">
-            <svg viewBox="0 0 48 48" width="36" height="36" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Inkhouse" className="shrink-0">
+            <svg viewBox="0 0 48 48" width="36" height="36" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Inkbridge" className="shrink-0">
               <rect width="48" height="48" rx="11" fill="var(--primary)" />
               <rect x="11" y="19" width="26" height="20" rx="1.5" fill="var(--primary-foreground)" />
               <path d="M24 8L40 22H8L24 8Z" fill="var(--primary-foreground)" />
               <path d="M24 25C24 25 19.5 28.5 19.5 32C19.5 34.5 21.5 36.5 24 36.5C26.5 36.5 28.5 34.5 28.5 32C28.5 28.5 24 25 24 25Z" fill="var(--primary)" />
             </svg>
-            <h1 className="text-3xl font-semibold tracking-tight">Inkhouse Starter</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Inkbridge Starter</h1>
           </div>
           <p className="text-muted-foreground max-w-lg">
-            A pre-configured Next.js + Tailwind + Storybook project wired up with Inkhouse. Follow the steps below to generate a pixel-accurate design system in Figma from these components.
+            A pre-configured Next.js + Tailwind + Storybook project wired up with Inkbridge. Follow the steps below to generate a pixel-accurate design system in Figma from these components.
           </p>
 
           <ol className="mt-2 flex flex-col gap-4">
@@ -44,11 +44,11 @@ export default function Home() {
               },
               {
                 title: "Load the plugin in Figma Desktop",
-                description: <>Go to <strong>Plugins → Development → Import plugin from manifest</strong> and select <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">node_modules/inkhouse/manifest.json</code>. Only needed once per project.</>,
+                description: <>Go to <strong>Plugins → Development → Import plugin from manifest</strong> and select <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">node_modules/inkbridge/manifest.json</code>. Only needed once per project.</>,
               },
               {
                 title: "Generate your design system",
-                description: <>Open any Figma file and run <strong>Plugins → Inkhouse → Generate Design System Page</strong>. The plugin scans your Storybook stories and renders every component as a native Figma frame.</>,
+                description: <>Open any Figma file and run <strong>Plugins → Inkbridge → Generate Design System Page</strong>. The plugin scans your Storybook stories and renders every component as a native Figma frame.</>,
               },
               {
                 title: "Edit tokens and push to code",
@@ -138,7 +138,7 @@ export default function Home() {
                 <CardDescription>Render your components as native Figma frames.</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Open the Inkhouse plugin in Figma Desktop and run <strong className="text-foreground">Generate Design System Page</strong> to sync.</p>
+                <p className="text-sm text-muted-foreground">Open the Inkbridge plugin in Figma Desktop and run <strong className="text-foreground">Generate Design System Page</strong> to sync.</p>
               </CardContent>
               <CardFooter className="gap-2">
                 <Button size="sm" className="flex-1">Open docs</Button>

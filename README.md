@@ -1,13 +1,13 @@
-# Inkhouse Starter
+# Inkbridge Starter
 
-A minimal Next.js + Tailwind CSS + Storybook project pre-configured with [Inkhouse](https://inkhouse.io) — so you can generate a pixel-accurate design system in Figma in minutes, without writing any components first.
+A minimal Next.js + Tailwind CSS + Storybook project pre-configured with [Inkbridge](https://inkbridge.io) — so you can generate a pixel-accurate design system in Figma in minutes, without writing any components first.
 
 ## What's included
 
 - **Next.js 15** (App Router, TypeScript)
 - **Tailwind CSS v4** + shadcn/ui components
 - **Storybook** with stories for every component
-- **Inkhouse** pre-wired — scanner route, token patch route, and scripts ready to go
+- **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
 
 ### Demo components
 
@@ -36,8 +36,8 @@ Click **"Use this template"** → **"Create a new repository"** on GitHub, then 
 Or clone directly to try it out locally:
 
 ```bash
-git clone https://github.com/inkn9ne/inkhouse-starter.git
-cd inkhouse-starter
+git clone https://github.com/inkn9ne/inkbridge-starter.git
+cd inkbridge-starter
 pnpm install
 ```
 
@@ -47,7 +47,7 @@ pnpm install
 2. Go to **Plugins → Development → Import plugin from manifest...**
 3. Select the file at:
    ```
-   node_modules/inkhouse/manifest.json
+   node_modules/inkbridge/manifest.json
    ```
 
 Figma remembers this path — you only do this once per project.
@@ -60,7 +60,7 @@ pnpm figma:dev
 
 ### 4. Generate your design system
 
-In Figma: **Plugins → Development → Inkhouse → Generate Design System Page**
+In Figma: **Plugins → Development → Inkbridge → Generate Design System Page**
 
 The plugin scans your Storybook stories and builds a "Design System" page with all components rendered as native Figma frames.
 
@@ -72,7 +72,7 @@ The plugin scans your Storybook stories and builds a "Design System" page with a
 2. Add a `.stories.tsx` file alongside it
 3. Re-run **Generate Design System Page** — it always reflects the current state
 
-See [inkhouse.io/docs](https://inkhouse.io/docs) for full documentation.
+See [inkbridge.io/docs](https://inkbridge.io/docs) for full documentation.
 
 ---
 
@@ -89,7 +89,7 @@ See [inkhouse.io/docs](https://inkhouse.io/docs) for full documentation.
 
 ## Configuration
 
-Edit `inkhouse.config.json` to control which paths the scanner searches:
+Edit `inkbridge.config.json` to control which paths the scanner searches:
 
 ```json
 {

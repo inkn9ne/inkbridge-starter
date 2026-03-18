@@ -1,5 +1,5 @@
 {
-  "name": "inkhouse-starter",
+  "name": "inkbridge-starter",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "figma:dev": "next dev",
-    "figma:scan": "tsx node_modules/inkhouse/scanner/cli.ts"
+    "figma:scan": "tsx node_modules/inkbridge/scanner/cli.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -37,7 +37,7 @@
     "@types/react-dom": "^19",
     "@vitest/browser-playwright": "^4.1.0",
     "@vitest/coverage-v8": "^4.1.0",
-    "inkhouse": "0.1.0-beta.1",
+    "inkbridge": "0.1.0-beta.1",
     "playwright": "^1.58.2",
     "storybook": "^10.2.19",
     "tailwindcss": "^4",

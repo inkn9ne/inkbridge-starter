@@ -43,7 +43,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── Theme: Default (green primary, inkhouse brand) ─── */
+/* ─── Theme: Default (green primary, inkbridge brand) ─── */
 :root {
   --radius: 0.5rem;
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;

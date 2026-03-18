@@ -24,8 +24,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Inkhouse Starter",
-  description: "Next.js + Tailwind + Storybook pre-configured with Inkhouse",
+  title: "Inkbridge Starter",
+  description: "Next.js + Tailwind + Storybook pre-configured with Inkbridge",
 };
 
 export default function RootLayout({
