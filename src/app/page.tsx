@@ -23,6 +23,12 @@ export default function Home() {
             <Badge variant="secondary">Starter template</Badge>
             <ThemeToggles />
           </div>
+          <svg viewBox="0 0 48 48" width="40" height="40" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="Inkhouse">
+            <rect width="48" height="48" rx="11" fill="var(--primary)" />
+            <rect x="11" y="19" width="26" height="20" rx="1.5" fill="var(--primary-foreground)" />
+            <path d="M24 8L40 22H8L24 8Z" fill="var(--primary-foreground)" />
+            <path d="M24 25C24 25 19.5 28.5 19.5 32C19.5 34.5 21.5 36.5 24 36.5C26.5 36.5 28.5 34.5 28.5 32C28.5 28.5 24 25 24 25Z" fill="var(--primary)" />
+          </svg>
           <h1 className="text-3xl font-semibold tracking-tight">Inkhouse Starter</h1>
           <p className="text-muted-foreground max-w-lg">
             A pre-configured Next.js + Tailwind + Storybook project wired up with Inkhouse. Follow the steps below to generate a pixel-accurate design system in Figma from these components.
