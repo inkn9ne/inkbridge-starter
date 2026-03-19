@@ -39,12 +39,9 @@ const config: StorybookConfig = {
   ],
   framework: '@storybook/nextjs-vite',
   staticDirs: ['../public'],
-  viteFinal: (viteConfig) => {
-    viteConfig.define = Object.assign({}, viteConfig.define, {
-      __STORYBOOK_BRAND_THEMES__: JSON.stringify(brandThemes),
-    });
-    return viteConfig;
-  },
+  env: (config) => Object.assign({}, config, {
+    STORYBOOK_BRAND_THEMES: JSON.stringify(brandThemes),
+  }),
 };
 
 export default config;
