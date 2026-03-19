@@ -10,19 +10,6 @@ const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const preview: Preview = {
   globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Light or dark mode',
-      defaultValue: 'light',
-      toolbar: {
-        icon: 'circlehollow',
-        items: [
-          { value: 'light', icon: 'sun', title: 'Light' },
-          { value: 'dark', icon: 'moon', title: 'Dark' },
-        ],
-        dynamicTitle: true,
-      },
-    },
     // Only show the Brand toolbar when globals.css defines at least one brand theme
     ...(brandThemes.length > 0 && {
       brand: {
@@ -43,12 +30,8 @@ const preview: Preview = {
 
   decorators: [
     (Story, context) => {
-      const theme = context.globals['theme'] as string;
       const brand = (context.globals['brand'] as string) || 'primary';
       const html = document.documentElement;
-
-      // Light / dark
-      html.classList.toggle('dark', theme === 'dark');
 
       // Brand: remove all known brand classes, then apply the selected one
       for (const t of brandThemes) html.classList.remove(t);
