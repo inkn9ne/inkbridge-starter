@@ -1,41 +1,48 @@
 import type { Preview } from '@storybook/nextjs-vite'
 import '../src/app/globals.css'
+// Import globals.css as raw text so we can parse theme names at runtime.
+// Vite's ?raw suffix is supported natively — no plugin needed.
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import globalsRaw from '../src/app/globals.css?raw'
 
-// Set by main.ts env() — lists every root-level brand class found in globals.css.
-const brandThemes: string[] = process.env.STORYBOOK_BRAND_THEMES
-  ? JSON.parse(process.env.STORYBOOK_BRAND_THEMES)
-  : [];
+function discoverThemes(css: string): string[] {
+  const seen = new Set<string>();
+  for (const m of css.matchAll(/^\.([a-z][a-z0-9-]*)\s*\{/gm)) {
+    const name = m[1];
+    if (name && name !== 'dark') seen.add(name);
+  }
+  return Array.from(seen);
+}
 
+const themes = discoverThemes(globalsRaw as string);
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const preview: Preview = {
   globalTypes: {
-    // Only show the Brand toolbar when globals.css defines at least one brand theme
-    ...(brandThemes.length > 0 && {
-      brand: {
-        name: 'Brand',
-        description: 'Brand theme variant',
-        defaultValue: 'primary',
-        toolbar: {
-          icon: 'paintbrush',
-          items: [
-            { value: 'primary', title: 'Primary' },
-            ...brandThemes.map((t) => ({ value: t, title: capitalize(t) })),
-          ],
-          dynamicTitle: true,
-        },
+    theme: {
+      name: 'Theme',
+      description: 'Active theme',
+      defaultValue: 'default',
+      toolbar: {
+        icon: 'paintbrush',
+        items: [
+          { value: 'default', title: 'Default' },
+          ...themes.map((t) => ({ value: t, title: capitalize(t) })),
+        ],
+        dynamicTitle: true,
       },
-    }),
+    },
   },
 
   decorators: [
     (Story, context) => {
-      const brand = (context.globals['brand'] as string) || 'primary';
+      const theme = (context.globals['theme'] as string) || 'default';
       const html = document.documentElement;
 
-      // Brand: remove all known brand classes, then apply the selected one
-      for (const t of brandThemes) html.classList.remove(t);
-      if (brand !== 'primary') html.classList.add(brand);
+      // Remove all discovered theme classes, then apply the selected one
+      for (const t of themes) html.classList.remove(t);
+      if (theme !== 'default') html.classList.add(theme);
 
       // Font CSS variables — next/font sets these via className on <html> in
       // Next.js, but Storybook bypasses the layout so we set them manually here.
@@ -49,7 +56,6 @@ const preview: Preview = {
   ],
 
   parameters: {
-    // globals.css drives the canvas background via bg-background
     backgrounds: { disable: true },
     controls: {
       matchers: {
