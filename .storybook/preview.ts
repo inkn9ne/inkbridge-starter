@@ -1,11 +1,10 @@
 import type { Preview } from '@storybook/nextjs-vite'
 import '../src/app/globals.css'
 
-// Injected at build time by viteFinal in main.ts — lists every root-level brand
-// class found in globals.css (e.g. ['secondary'] or ['blue', 'green']).
-declare const __STORYBOOK_BRAND_THEMES__: string[];
-const brandThemes: string[] =
-  typeof __STORYBOOK_BRAND_THEMES__ !== 'undefined' ? __STORYBOOK_BRAND_THEMES__ : [];
+// Set by main.ts env() — lists every root-level brand class found in globals.css.
+const brandThemes: string[] = process.env.STORYBOOK_BRAND_THEMES
+  ? JSON.parse(process.env.STORYBOOK_BRAND_THEMES)
+  : [];
 
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
