@@ -34,22 +34,18 @@ function Switcher({
 
 export function ThemeToggles() {
   const { resolvedTheme, setTheme } = useTheme();
-  const [brand, setBrand] = useState<"primary" | "secondary">("primary");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const [brand, setBrand] = useState<"primary" | "secondary" | null>(null);
 
   useEffect(() => {
-    if (!mounted) return;
-    const html = document.documentElement;
-    if (brand === "secondary") {
-      html.classList.add("secondary");
-    } else {
-      html.classList.remove("secondary");
-    }
-  }, [brand, mounted]);
+    const stored = document.cookie.match(/(?:^|;\s*)brand=([^;]*)/)?.[1];
+    setBrand(stored === "secondary" ? "secondary" : "primary");
+  }, []);
 
-  if (!mounted) return <div className="h-8 w-48" />;
+  useEffect(() => {
+    if (brand === null) return;
+    document.documentElement.classList.toggle("secondary", brand === "secondary");
+    document.cookie = `brand=${brand}; path=/; max-age=31536000; SameSite=Lax`;
+  }, [brand]);
 
   const isDark = resolvedTheme === "dark";
 
@@ -72,7 +68,7 @@ export function ThemeToggles() {
           { value: "primary", label: "Primary" },
           { value: "secondary", label: "Secondary" },
         ]}
-        value={brand}
+        value={brand ?? "primary"}
         onChange={(v) => setBrand(v as "primary" | "secondary")}
       />
     </div>

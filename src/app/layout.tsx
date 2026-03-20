@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Inter, Open_Sans, Playfair_Display } from "next/font/google";
+import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -28,13 +29,14 @@ export const metadata: Metadata = {
   description: "Next.js + Tailwind + Storybook pre-configured with Inkbridge",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const brand = (await cookies()).get("brand")?.value === "secondary" ? "secondary" : "primary";
   return (
-    <html lang="en" suppressHydrationWarning className={`${openSans.variable} ${inter.variable} ${playfair.variable} ${geistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${openSans.variable} ${inter.variable} ${playfair.variable} ${geistMono.variable}${brand === "secondary" ? " secondary" : ""}`}>
       <body className="antialiased">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
