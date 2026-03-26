@@ -7,12 +7,19 @@ Detected story files:
 - `src/components/ui/badge.stories.tsx`
 - `src/components/ui/button.stories.tsx`
 - `src/components/ui/card.stories.tsx`
+- `src/components/ui/checkbox.stories.tsx`
 - `src/components/ui/input.stories.tsx`
+- `src/components/ui/popover.stories.tsx`
+- `src/components/ui/radio-group.stories.tsx`
+- `src/components/ui/switch.stories.tsx`
+- `src/components/ui/tabs.stories.tsx`
+- `src/components/ui/tooltip.stories.tsx`
 - `src/components/gradient-showcase/gradient-showcase.stories.tsx`
 
 Current coverage summary:
-- Atoms: `Button`, `Badge`, `Input`, `Alert`
-- Molecules: `Card`
+- Atoms: `Button`, `Badge`, `Input`, `Alert`, `Checkbox`, `Switch`, `RadioGroup`
+- Molecules: `Card`, `Tabs`
+- Overlay/portal patterns: `Tooltip`, `Popover`
 - Utility/demo: `GradientShowcase`
 
 ## Target coverage (UI-library baseline)
@@ -51,12 +58,12 @@ Optional (for known risky components):
 
 ## Tracking checklist
 
-- [ ] Tabs
-- [ ] Switch
-- [ ] Checkbox
-- [ ] RadioGroup
-- [ ] Tooltip
-- [ ] Popover
+- [x] Tabs
+- [x] Switch
+- [x] Checkbox
+- [x] RadioGroup
+- [x] Tooltip
+- [x] Popover
 - [ ] Select/Combobox
 - [ ] Toast
 - [ ] Dialog/Sheet
