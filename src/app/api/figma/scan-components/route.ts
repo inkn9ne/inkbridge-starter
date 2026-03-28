@@ -27,7 +27,8 @@ const CORS = {
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
-    const tokenSourceMode = url.searchParams.get('tokenSourceMode') || 'auto';
+    const rawTokenSourceMode = (url.searchParams.get('tokenSourceMode') || 'css').trim().toLowerCase();
+    const tokenSourceMode = rawTokenSourceMode === 'dtcg' ? 'dtcg' : 'css';
     const cssTokenPath = url.searchParams.get('cssTokenPath') || undefined;
     const dtcgTokenPath = url.searchParams.get('dtcgTokenPath') || undefined;
 
@@ -35,7 +36,7 @@ export async function GET(request: Request) {
 
     const args = [CLI, '--output', OUTPUT, '--include-tokens', '--token-mode', tokenSourceMode];
     if (cssTokenPath) args.push('--css-token-path', cssTokenPath);
-    if (dtcgTokenPath) args.push('--dtcg-token-path', dtcgTokenPath);
+    if (tokenSourceMode === 'dtcg' && dtcgTokenPath) args.push('--dtcg-token-path', dtcgTokenPath);
 
     const result = spawnSync(TSX, args, { cwd: CWD, encoding: 'utf-8' });
     if (result.status !== 0) {
