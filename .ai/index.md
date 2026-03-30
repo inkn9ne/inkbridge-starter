@@ -16,6 +16,7 @@
 
 - Treat Storybook stories as test vectors for Figma generation.
 - Prefer adding missing states/variants in stories before changing plugin heuristics.
+- Use stable/WIP plugin lanes from [`context/plugin-integration.md`](./context/plugin-integration.md) instead of stacking live patches on one branch.
 - Record regressions in [`context/regressions.md`](./context/regressions.md) with minimal repro.
 - Record key starter-only decisions under [`decisions/`](./decisions).
 

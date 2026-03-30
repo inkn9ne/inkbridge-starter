@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button";
 import {
   Card,
   CardContent,
@@ -8,10 +7,15 @@ import {
   CardHeader,
   CardTitle,
 } from "./card";
+import { Button } from "./button";
 
 const meta: Meta<typeof Card> = {
+  title: "Components/Card",
   component: Card,
+  tags: ["autodocs"],
+  parameters: { layout: "centered" },
 };
+
 export default meta;
 type Story = StoryObj<typeof Card>;
 
@@ -20,11 +24,12 @@ export const Default: Story = {
     <Card className="w-80">
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
-        <CardDescription>A short description of this card.</CardDescription>
+        <CardDescription>A short description of the card content.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground text-sm">
-          Card body content goes here. This is where the main information lives.
+        <p className="text-sm text-muted-foreground">
+          This is the card body. Use it for any content - text, images, or
+          other components.
         </p>
       </CardContent>
     </Card>
@@ -35,28 +40,30 @@ export const WithFooter: Story = {
   render: () => (
     <Card className="w-80">
       <CardHeader>
-        <CardTitle>Plan: Pro</CardTitle>
-        <CardDescription>Everything you need to ship faster.</CardDescription>
+        <CardTitle>Upgrade your plan</CardTitle>
+        <CardDescription>Unlock all features with Pro.</CardDescription>
       </CardHeader>
       <CardContent>
-        <p className="text-3xl font-bold">$29<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+        <p className="text-sm text-muted-foreground">
+          Get access to unlimited projects, priority support, and advanced
+          analytics.
+        </p>
       </CardContent>
-      <CardFooter className="gap-2">
-        <Button className="flex-1">Get started</Button>
-        <Button variant="outline">Learn more</Button>
+      <CardFooter className="flex justify-between">
+        <Button variant="outline">Cancel</Button>
+        <Button>Upgrade</Button>
       </CardFooter>
     </Card>
   ),
 };
 
-export const Small: Story = {
+export const Minimal: Story = {
   render: () => (
-    <Card size="sm" className="w-64">
-      <CardHeader>
-        <CardTitle>Small card</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground text-sm">Compact layout.</p>
+    <Card className="w-80">
+      <CardContent className="pt-6">
+        <p className="text-sm text-muted-foreground">
+          A minimal card with content only, no header or footer.
+        </p>
       </CardContent>
     </Card>
   ),
