@@ -2,17 +2,38 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./button";
 
 const meta: Meta<typeof Button> = {
+  title: "Atoms/Button",
   component: Button,
-  args: { children: "Button" },
+  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
+  argTypes: {
+    variant: {
+      control: { type: "select" },
+      options: ["default", "destructive", "outline", "secondary", "ghost", "link"],
+    },
+    size: {
+      control: { type: "select" },
+      options: ["default", "sm", "lg", "icon"],
+    },
+  },
 };
+
 export default meta;
+
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    children: "Primary Action",
+    variant: "default",
+  },
+};
 
 export const Variants: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-3">
       <Button variant="default">Default</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="outline">Outline</Button>
@@ -25,15 +46,13 @@ export const Variants: Story = {
 
 export const Sizes: Story = {
   render: () => (
-    <div className="flex flex-wrap items-center gap-2">
-      <Button size="xs">Extra Small</Button>
+    <div className="flex flex-wrap items-center gap-3">
       <Button size="sm">Small</Button>
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
+      <Button size="icon" aria-label="Add">
+        +
+      </Button>
     </div>
   ),
-};
-
-export const Disabled: Story = {
-  args: { disabled: true, children: "Disabled" },
 };
