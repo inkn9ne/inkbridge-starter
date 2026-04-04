@@ -32,23 +32,4 @@ export const OpenPanel: Story = {
   ),
 }
 
-export const Variants: Story = {
-  render: () => (
-    <TooltipProvider>
-      <div className="flex flex-wrap items-center gap-3">
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="outline">Top</Button>} />
-          <TooltipContent side="top">Top placement</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="outline">Right</Button>} />
-          <TooltipContent side="right">Right placement</TooltipContent>
-        </Tooltip>
-        <Tooltip>
-          <TooltipTrigger render={<Button variant="outline">Bottom</Button>} />
-          <TooltipContent side="bottom">Bottom placement</TooltipContent>
-        </Tooltip>
-      </div>
-    </TooltipProvider>
-  ),
-}
+
