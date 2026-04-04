@@ -47,24 +47,3 @@ export const Horizontal: Story = {
     </RadioGroup>
   ),
 }
-
-export const Responsive: Story = {
-  render: () => (
-    <div className="grid max-w-3xl gap-4 md:grid-cols-2">
-      <div className="space-y-2 rounded-lg border border-border p-4">
-        <p className="text-sm font-medium">Mobile navigation</p>
-        <RadioGroup defaultValue="bottom" className="gap-2">
-          <label className="flex items-center gap-2 text-sm"><RadioGroupItem value="bottom" /> Bottom bar</label>
-          <label className="flex items-center gap-2 text-sm"><RadioGroupItem value="drawer" /> Drawer</label>
-        </RadioGroup>
-      </div>
-      <div className="space-y-2 rounded-lg border border-border p-4">
-        <p className="text-sm font-medium">Desktop navigation</p>
-        <RadioGroup defaultValue="sidebar" className="gap-2">
-          <label className="flex items-center gap-2 text-sm"><RadioGroupItem value="sidebar" /> Sidebar</label>
-          <label className="flex items-center gap-2 text-sm"><RadioGroupItem value="top" /> Top bar</label>
-        </RadioGroup>
-      </div>
-    </div>
-  ),
-}

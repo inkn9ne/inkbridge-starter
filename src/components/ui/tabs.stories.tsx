@@ -63,31 +63,6 @@ export const Variants: Story = {
   ),
 }
 
-export const Responsive: Story = {
-  render: () => (
-    <div className="grid max-w-4xl gap-4 md:grid-cols-2">
-      <Tabs defaultValue="small" className="w-full">
-        <TabsList className="w-full">
-          <TabsTrigger value="small" className="flex-1">Small</TabsTrigger>
-          <TabsTrigger value="medium" className="flex-1">Medium</TabsTrigger>
-        </TabsList>
-        <TabsContent value="small" className="text-sm">Compact tab layout.</TabsContent>
-        <TabsContent value="medium" className="text-sm">Alternative compact layout.</TabsContent>
-      </Tabs>
-
-      <Tabs defaultValue="desktop" className="w-full">
-        <TabsList className="w-full justify-start">
-          <TabsTrigger value="desktop">Desktop</TabsTrigger>
-          <TabsTrigger value="tablet">Tablet</TabsTrigger>
-          <TabsTrigger value="mobile">Mobile</TabsTrigger>
-        </TabsList>
-        <TabsContent value="desktop">3-column layout with side panel.</TabsContent>
-        <TabsContent value="tablet">2-column layout with stacked controls.</TabsContent>
-        <TabsContent value="mobile">Single-column flow with condensed actions.</TabsContent>
-      </Tabs>
-    </div>
-  ),
-}
 
 export const Composition: Story = {
   render: () => (

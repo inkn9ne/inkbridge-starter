@@ -31,24 +31,3 @@ export const States: Story = {
     </div>
   ),
 }
-
-export const Responsive: Story = {
-  render: () => (
-    <div className="grid max-w-3xl gap-3 md:grid-cols-2">
-      <div className="space-y-2 rounded-lg border border-border p-4">
-        <p className="text-sm font-medium">Mobile rules</p>
-        <div className="flex items-center justify-between text-sm">
-          <span>Auto-save</span>
-          <Switch defaultChecked />
-        </div>
-      </div>
-      <div className="space-y-2 rounded-lg border border-border p-4">
-        <p className="text-sm font-medium">Desktop rules</p>
-        <div className="flex items-center justify-between text-sm">
-          <span>Command palette</span>
-          <Switch />
-        </div>
-      </div>
-    </div>
-  ),
-}
