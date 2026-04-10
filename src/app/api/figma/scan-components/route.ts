@@ -15,7 +15,11 @@ import { spawnSync } from 'child_process';
 
 const CWD = process.cwd();
 const TSX = path.resolve(CWD, 'node_modules/.bin/tsx');
-const CLI = path.resolve(CWD, 'node_modules/inkbridge/scanner/cli.ts');
+// When started with `figma:dev:local` (INKBRIDGE_LOCAL=1), use the sibling repo's
+// scanner source directly so scanner changes are picked up without reinstalling.
+const CLI = process.env.INKBRIDGE_LOCAL
+  ? path.resolve(CWD, '../inkbridge/tools/figma-plugin-tailwind-tokens/scanner/cli.ts')
+  : path.resolve(CWD, 'node_modules/inkbridge/scanner/cli.ts');
 const OUTPUT = path.resolve(CWD, '.inkbridge/component-definitions.json');
 
 const CORS = {
