@@ -18,8 +18,11 @@ optional local-link mode for faster plugin iteration.
 
 The plugin reads component defs from starter stories.
 
-Current script:
-- `pnpm figma:scan` → `tsx node_modules/inkbridge/scanner/cli.ts`
+Two scan modes:
+- `pnpm figma:scan` → runs from `node_modules/inkbridge/scanner/cli.ts` (installed copy — use for released/beta builds)
+- `pnpm figma:scan:local` → runs directly from `../inkbridge/tools/figma-plugin-tailwind-tokens/scanner/cli.ts` (source — use during active plugin dev to skip reinstall)
+
+Important: `figma:scan` and `figma:scan:local` use different scanner binaries. When iterating on scanner source in `../inkbridge`, use `figma:scan:local` so changes are picked up immediately without `figma:plugin:use-local`.
 
 Notes:
 - Story coverage directly affects what appears in generated Figma frames.
@@ -42,10 +45,14 @@ Install freshness rule (important):
 
 Suggested loop:
 1. In `../inkbridge`, edit plugin source.
-2. In `../inkbridge`, run `pnpm figma:build`.
-3. In starter, run `pnpm figma:plugin:use-local`.
-4. In starter, run `pnpm figma:scan` and validate in Figma.
-5. After publish, run `pnpm figma:plugin:use-beta` to return to released builds.
+2. In `../inkbridge`, run `npm run build` (compiles `code.js`).
+3. In starter, run `pnpm figma:plugin:use-local` to relink installed copy.
+4. In starter, run `pnpm figma:scan:local` to scan with latest scanner source directly (no reinstall needed).
+5. Validate in Figma.
+6. After publish, run `pnpm figma:plugin:use-beta` to return to released builds.
+
+Shortcut when only scanner source changed (no plugin build needed):
+- Skip steps 2–3, just run `pnpm figma:scan:local`.
 
 ## Stable vs WIP lanes (2026-03-30 checkpoint)
 
