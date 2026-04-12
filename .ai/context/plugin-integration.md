@@ -23,6 +23,12 @@ Two dev server modes:
 - `pnpm figma:dev` → uses installed `node_modules/inkbridge/scanner/cli.ts` (released/beta builds)
 - `pnpm figma:dev:local` → sets `INKBRIDGE_LOCAL=1`; API route uses `../inkbridge/tools/figma-plugin-tailwind-tokens/scanner/cli.ts` directly (plugin dev — no reinstall needed)
 
+Runtime scan endpoint selection (inside the plugin UI):
+- First reachable wins: `localhost:3000` → `localhost:4000` → `localhost:5173`.
+- In starter sessions, `3000` is usually selected (starter app).
+- If the plugin is imported from `../inkbridge` manifest instead of starter
+  `node_modules/inkbridge/manifest.json`, it can end up scanning the wrong app.
+
 Manual scan scripts (for debugging outside Figma):
 - `pnpm figma:scan` → same as figma:dev, from installed copy
 - `pnpm figma:scan:local` → same as figma:dev:local, from inkbridge source
@@ -52,6 +58,11 @@ Suggested loop (plugin dev):
 3. Start starter with `pnpm figma:dev:local` — scanner changes are always live, no reinstall needed.
 4. Validate in Figma.
 5. After publish, switch back: `pnpm figma:plugin:use-beta` then restart with `pnpm figma:dev`.
+
+Important:
+- `pnpm figma:dev:local` makes scanner code live from sibling `inkbridge`.
+- It does **not** replace the already-imported Figma manifest source. Keep using
+  starter’s `node_modules/inkbridge/manifest.json` when validating starter scans.
 
 ## Stable vs WIP lanes (2026-03-30 checkpoint)
 

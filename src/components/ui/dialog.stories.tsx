@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { XIcon } from "lucide-react";
 import { Button } from "./button";
 import {
   Dialog,
@@ -14,13 +13,12 @@ import {
 const meta: Meta<typeof Dialog> = {
   title: "Components/UI/Dialog",
   component: Dialog,
-  tags: ["autodocs"],
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component:
-          "Modal dialog. Default shows the trigger button. OpenPanel shows a static dialog panel (no portal/overlay) for Figma rendering.",
+          "Modal dialog. Default shows the trigger button only (closed state). OpenPanel and Confirm use defaultOpen so the plugin extracts and renders the dialog panel from the portal.",
       },
     },
   },
@@ -29,7 +27,7 @@ const meta: Meta<typeof Dialog> = {
 export default meta;
 type Story = StoryObj<typeof Dialog>;
 
-/** Trigger button — the closed state (DialogContent is portal-rendered, scanner skips it). */
+/** Trigger button — closed state. The plugin filters portal content for stories without defaultOpen. */
 export const Default: Story = {
   render: () => (
     <Dialog>
@@ -67,25 +65,20 @@ export const Default: Story = {
   ),
 };
 
-/** Static dialog panel — rendered without portal/overlay for Figma. */
+/** Open dialog panel — defaultOpen so the plugin extracts the portal content and renders the full panel. */
 export const OpenPanel: Story = {
   render: () => (
-    <div className="relative w-120">
-      <div className="bg-background grid w-full gap-4 rounded-lg border p-6 shadow-lg">
-        {/* Close button */}
-        <button className="absolute top-4 right-4 rounded-xs opacity-70 hover:opacity-100">
-          <XIcon className="size-4" />
-        </button>
-
-        {/* Header */}
-        <div className="flex flex-col gap-2 text-left">
-          <h2 className="text-lg leading-none font-semibold">Edit profile</h2>
-          <p className="text-muted-foreground text-sm">
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        <Button variant="outline">Open Dialog</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
             Make changes to your profile here. Click save when you&apos;re done.
-          </p>
-        </div>
-
-        {/* Body */}
+          </DialogDescription>
+        </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <label className="text-right text-sm font-medium">Name</label>
@@ -102,37 +95,35 @@ export const OpenPanel: Story = {
             />
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="flex flex-row justify-end gap-2">
+        <DialogFooter>
           <Button variant="outline">Cancel</Button>
-          <Button>Save changes</Button>
-        </div>
-      </div>
-    </div>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   ),
 };
 
-/** Confirmation / destructive dialog. */
+/** Confirmation / destructive dialog — defaultOpen so the plugin renders the panel. */
 export const Confirm: Story = {
   render: () => (
-    <div className="relative w-100">
-      <div className="bg-background grid w-full gap-4 rounded-lg border p-6 shadow-lg">
-        <button className="absolute top-4 right-4 rounded-xs opacity-70 hover:opacity-100">
-          <XIcon className="size-4" />
-        </button>
-        <div className="flex flex-col gap-2 text-left">
-          <h2 className="text-lg leading-none font-semibold">Are you sure?</h2>
-          <p className="text-muted-foreground text-sm">
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        <Button variant="destructive">Delete account</Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>Are you sure?</DialogTitle>
+          <DialogDescription>
             This action cannot be undone. This will permanently delete your
             account and remove your data from our servers.
-          </p>
-        </div>
-        <div className="flex flex-row justify-end gap-2">
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
           <Button variant="outline">Cancel</Button>
           <Button variant="destructive">Delete account</Button>
-        </div>
-      </div>
-    </div>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   ),
 };

@@ -37,4 +37,14 @@ Use this file to record starter story cases that expose scanner/renderer bugs.
 
 ## Closed
 
-- (none)
+- Date: 2026-04-12
+- Component/story: Dialog / OpenPanel + Confirm (including responsive preview rows)
+- Expected: Close icon stays top-right, panel content does not clip/truncate in responsive previews
+- Actual (before fix): Ring wrapper around close icon stretched to dialog content width; responsive preview viewport clipped taller content
+- Repro steps: Generate design system and inspect Dialog block in Figma (`OpenPanel`, `Confirm`, responsive rows)
+- Candidate root cause:
+  - Ring parsing treated `ring-offset-*`/`ring-*` modifiers as standalone ring signals
+  - Absolute-positioned ring child inherited width/stretch behaviors
+  - Responsive preview viewport used `clipsContent = true`
+- Linked issue/PR: plugin core fix in sibling `inkbridge` repo (`ui-builder`/`tailwind`/`node-ir`/`story-builder`)
+- Status: Fixed in local plugin source; rebuild + local-link required
