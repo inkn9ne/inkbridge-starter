@@ -114,9 +114,7 @@ export const Confirm: Story = {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Are you sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+          <DialogDescription>This action cannot be undone. This will permanently delete your account and remove your data from our servers.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
