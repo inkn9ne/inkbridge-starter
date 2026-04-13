@@ -14,6 +14,35 @@ optional local-link mode for faster plugin iteration.
 4. Run plugin command:
    - `Generate Design System Page`
 
+## Dev command matrix (starter + plugin)
+
+Use the command from the repo that owns it:
+
+- In `inkbridge-starter`:
+  - `pnpm figma:dev` → start starter app (scanner from installed package)
+  - `pnpm figma:dev:local` → start starter app with `INKBRIDGE_LOCAL=1` (scanner TS from sibling `../inkbridge`)
+- In `inkbridge` (repo root):
+  - `pnpm figma:watch` → watch/build plugin `code.js` continuously
+  - `pnpm figma:build` → one-off plugin build
+- In `inkbridge/tools/figma-plugin-tailwind-tokens`:
+  - `pnpm run watch` → same as root `pnpm figma:watch`, but from plugin dir
+  - `pnpm run build` → same as root `pnpm figma:build`, but from plugin dir
+
+Important:
+- `pnpm watch` at `inkbridge` root fails (`watch` script does not exist there).
+- Use `pnpm figma:watch` at root, or `pnpm run watch` inside plugin dir.
+
+## Rebuild rules (when required)
+
+- If you changed only starter stories/components/styles:
+  - no plugin rebuild needed; regenerate in Figma is enough.
+- If you changed plugin source (`ui-builder.ts`, `story-builder.ts`, renderer logic):
+  - rebuild is required (`pnpm figma:build`) or keep `pnpm figma:watch` running.
+- If Figma plugin is imported from the `inkbridge` repo manifest path:
+  - watcher/build updates are picked up from that manifest source.
+- If Figma plugin is imported from starter `node_modules/inkbridge/manifest.json`:
+  - you must relink/reinstall/sync package contents after plugin source builds.
+
 ## Scanner contract
 
 The plugin reads component defs from starter stories. The scan is triggered by the
