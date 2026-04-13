@@ -35,6 +35,15 @@ Use this file to record starter story cases that expose scanner/renderer bugs.
 - Linked issue/PR: (open in inkbridge repo)
 - Status: Mostly resolved. Secondary theme renders correctly. Primary theme had stale cached frames from previous broken runs — workaround is to manually delete the Sonner block in the Primary Theme column and regenerate. Root fix needed in inkbridge: stale frames from previously broken renders should be invalidated when the component block hash changes.
 
+- Date: 2026-04-13
+- Component/story: Dialog / Confirm + responsive previews
+- Expected: Dialog content renders at correct width and height, no clipping
+- Actual: Dialog content in Confirm/responsive preview frames is clipped or misaligned (width/height flow issue)
+- Repro steps: Generate design system; inspect Dialog Confirm block at node 509:1509 in Figma
+- Candidate root cause: Stale upstream `widthOverride` leaking into dialog content panels via responsive strip/container chain in `populateStoryLayout()` → `applyFullWidthIfPossible()`. Close-icon position bug is resolved. Content sizing is the remaining issue.
+- Linked issue/PR: `feat/figma-portal-rendering` branch in inkbridge repo. Partial fixes applied (root-only grid-col extraction, removed forced 1px resize, bounded widthOverride to parent content box).
+- Status: Open — plugin-side root fix needed. Story content is not the cause; no starter story changes required.
+
 ## Closed
 
 - Date: 2026-04-12
