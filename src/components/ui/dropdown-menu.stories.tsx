@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
-  CheckIcon,
   ChevronRightIcon,
   CopyIcon,
   LogOutIcon,
@@ -10,6 +9,7 @@ import {
   UserIcon,
 } from "lucide-react";
 import { Button } from "./button";
+import { Checkbox } from "./checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,7 +30,7 @@ const meta: Meta<typeof DropdownMenu> = {
     docs: {
       description: {
         component:
-          "Dropdown menu. Default shows the trigger; OpenPanel shows a static menu panel without portal for Figma rendering.",
+          "Dropdown menu. Default shows the trigger; OpenPanel / WithIcons / WithCheckboxes use `defaultOpen` so the panel renders inline for Figma.",
       },
     },
   },
@@ -72,92 +72,99 @@ export const Default: Story = {
   ),
 };
 
-/** Static open menu panel — no portal for Figma. */
+/** Open menu panel with grouped items, separators, and shortcuts. */
 export const OpenPanel: Story = {
   render: () => (
-    <div className="w-56 rounded-md border bg-popover text-popover-foreground p-1 shadow-md">
-      <div className="px-2 py-1.5 text-sm font-medium">My Account</div>
-      <div className="-mx-1 my-1 h-px bg-border" />
-      {[
-        { icon: UserIcon, label: "Profile", shortcut: "⇧⌘P" },
-        { icon: Settings2Icon, label: "Settings", shortcut: "⌘S" },
-        { icon: CopyIcon, label: "Billing", shortcut: "⌘B" },
-      ].map(({ icon: Icon, label, shortcut }) => (
-        <div
-          key={label}
-          className="relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent"
-        >
-          <Icon className="size-4 text-muted-foreground" />
-          {label}
-          <span className="ml-auto text-xs tracking-widest text-muted-foreground">
-            {shortcut}
-          </span>
-        </div>
-      ))}
-      <div className="-mx-1 my-1 h-px bg-border" />
-      <div className="relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none text-destructive hover:bg-destructive/10">
-        <LogOutIcon className="size-4" />
-        Log out
-        <span className="ml-auto text-xs tracking-widest text-muted-foreground">
-          ⇧⌘Q
-        </span>
-      </div>
-    </div>
+    <DropdownMenu defaultOpen>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Open Menu</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <UserIcon />
+            Profile
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Settings2Icon />
+            Settings
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <CopyIcon />
+            Billing
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">
+          <LogOutIcon />
+          Log out
+          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   ),
 };
 
-/** Menu with icons and a sub-menu indicator. */
+/** Menu with icons and a sub-menu indicator row. */
 export const WithIcons: Story = {
   render: () => (
-    <div className="w-56 rounded-md border bg-popover text-popover-foreground p-1 shadow-md">
-      {[
-        { icon: PencilIcon, label: "Edit" },
-        { icon: CopyIcon, label: "Duplicate" },
-      ].map(({ icon: Icon, label }) => (
-        <div
-          key={label}
-          className="relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent"
-        >
-          <Icon className="size-4 text-muted-foreground" />
-          {label}
-        </div>
-      ))}
-      <div className="-mx-1 my-1 h-px bg-border" />
-      <div className="relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none hover:bg-accent">
-        <Settings2Icon className="size-4 text-muted-foreground" />
-        More options
-        <ChevronRightIcon className="ml-auto size-4" />
-      </div>
-      <div className="-mx-1 my-1 h-px bg-border" />
-      <div className="relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-destructive outline-hidden select-none hover:bg-destructive/10">
-        <TrashIcon className="size-4" />
-        Delete
-      </div>
-    </div>
+    <DropdownMenu defaultOpen>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">Actions</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuItem>
+          <PencilIcon />
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <CopyIcon />
+          Duplicate
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Settings2Icon />
+          More options
+          <ChevronRightIcon className="ml-auto" />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">
+          <TrashIcon />
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   ),
 };
 
-/** Checkbox-style menu items. */
+/** Checkbox-style menu items using the real Checkbox component. */
 export const WithCheckboxes: Story = {
   render: () => (
-    <div className="w-48 rounded-md border bg-popover text-popover-foreground p-1 shadow-md">
-      <div className="px-2 py-1.5 text-sm font-medium">Appearance</div>
-      <div className="-mx-1 my-1 h-px bg-border" />
-      {[
-        { label: "Show toolbar", checked: true },
-        { label: "Show sidebar", checked: true },
-        { label: "Show statusbar", checked: false },
-      ].map(({ label, checked }) => (
-        <div
-          key={label}
-          className="relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none hover:bg-accent"
-        >
-          <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center rounded-sm border border-input">
-            {checked && <CheckIcon className="size-3" />}
-          </span>
-          {label}
-        </div>
-      ))}
-    </div>
+    <DropdownMenu defaultOpen>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">View</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Checkbox checked />
+          Show toolbar
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Checkbox checked />
+          Show sidebar
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Checkbox />
+          Show statusbar
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   ),
 };
