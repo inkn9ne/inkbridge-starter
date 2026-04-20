@@ -21,11 +21,17 @@ Exit criteria:
 
 ## Phase 2: Interaction + data
 
-Deliver:
-- Select or Combobox
-- Toast
-- Dialog/Sheet
-- Table
+Status: mostly complete (2026-04-07)
+
+Delivered:
+- [x] Select
+- [x] Dialog
+- [x] Sheet
+- [x] Table
+- [x] DropdownMenu (bonus)
+- [x] Accordion, Breadcrumb, Pagination, Separator (bonus)
+- [x] Toast (Sonner)
+- [ ] Drawer, ScrollArea, Chart, Form, InfoCard — components exist, stories pending
 
 Add stress stories:
 - portal-open states
