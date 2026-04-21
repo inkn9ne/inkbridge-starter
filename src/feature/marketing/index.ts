@@ -1,0 +1,9 @@
+export { HeroSection } from "./components/hero/hero-section";
+export { CompatibilityBar } from "./components/compatibility-bar/compatibility-bar";
+export { DemoSection } from "./components/demo/demo-section";
+export { HowItWorksSection } from "./components/how-it-works";
+export { FeaturesSection } from "./components/features";
+export { ComparisonTable } from "./components/comparison-table";
+export { StarterBanner } from "./components/starter-banner/starter-banner";
+export { FaqSection } from "./components/faq/faq-section";
+export { CtaSection } from "./components/cta";
