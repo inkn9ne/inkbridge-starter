@@ -12,7 +12,7 @@ import { HiMenu } from "react-icons/hi";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { MobileNavLinks } from "./mobile-nav-links";
 
-export function MobileNav() {
+export function MobileNav({ defaultOpen }: { defaultOpen?: boolean } = {}) {
   return (
     <div className="flex md:hidden w-full items-center justify-between">
       {/* Logo */}
@@ -22,7 +22,7 @@ export function MobileNav() {
       </Link>
 
       {/* Hamburger */}
-      <Sheet>
+      <Sheet defaultOpen={defaultOpen}>
         <SheetTrigger className="flex items-center justify-center size-9 rounded-md hover:bg-white/10 transition-colors text-primary-foreground">
           <HiMenu className="size-5" />
         </SheetTrigger>
