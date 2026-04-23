@@ -27,7 +27,7 @@ export function MobileNavLinks() {
         <div className="flex flex-col gap-0.5">
           {NAV_LINKS.map(({ href, label, description }) => {
             const isExactActive = href === "/" ? pathname === "/" : pathname === href;
-            const isSectionActive = href !== "/" && !isExactActive && pathname.startsWith(href + "/");
+            const isSectionActive = href !== "/" && !isExactActive && pathname?.startsWith(href + "/") === true;
             return (
               <SheetClose key={href} asChild>
                 <Link
