@@ -5893,7 +5893,9 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inkbridge@file:../inkbridge/tools/figma-plugin-tailwind-tokens: {}
+  inkbridge@file:../inkbridge/tools/figma-plugin-tailwind-tokens:
+    dependencies:
+      tailwind-merge: 3.5.0
 
   internmap@2.0.3: {}
 
