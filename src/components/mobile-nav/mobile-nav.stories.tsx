@@ -24,13 +24,6 @@ const meta: Meta<typeof MobileNav> = {
   globals: {
     viewport: { value: "mobile", isRotated: false },
   },
-  decorators: [
-    (Story) => (
-      <div className="w-full bg-primary px-4 py-2">
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
@@ -39,12 +32,17 @@ type Story = StoryObj<typeof MobileNav>;
 
 /** Default state — trigger (closed). Tap the menu icon to open the drawer. */
 export const Default: Story = {
+  decorators: [
+    (Story) => (
+      <div className="w-full bg-primary px-4 py-2">
+        <Story />
+      </div>
+    ),
+  ],
   render: () => <MobileNav />,
 };
 
 /** Drawer open — full-screen Sheet with links, theme switcher, and login. */
 export const Open: Story = {
-  parameters: { layout: "fullscreen" },
-  decorators: [(Story) => <Story />],
   render: () => <MobileNav defaultOpen />,
 };

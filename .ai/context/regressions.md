@@ -46,6 +46,22 @@ Use this file to record starter story cases that expose scanner/renderer bugs.
 
 ## Closed
 
+- Date: 2026-04-24
+- Component/story: MobileNav / Open (Sheet drawer with nav Links)
+- Expected: Drawer fills the 360 px viewport, top bar `justify-between` splits logo left / theme-switcher + X right, menu items stretch full width with arrow at the right edge, no green decorator leaking around the panel
+- Actual (before fix): Panel hugged at 270–323 px, logo+theme-switcher packed tight, every menu link had a gray `hover:bg-muted` background at rest, Fragment wrapper stayed at 100 px default so nav + links collapsed to narrow pill shapes
+- Candidate root causes (all resolved in sibling `inkbridge` plugin source):
+  - Scanner: `cn()` / `cva()` / `twMerge()` results weren't passed through `tailwind-merge`, so `w-3/4 ... w-full` both survived on SheetContent
+  - Scanner: unresolvable ternaries unioned both branches into className — `bg-muted hover:bg-muted`
+  - Plugin: `tailwind.ts` never wrote `FRAME_CROSS_ALIGN`, so VERTICAL parents didn't cascade STRETCH to block children
+  - Plugin: `<a>`/`<button>`/`<label>` missing from `BLOCK_TAGS` in `width-solver.ts`
+  - Plugin: `injectPortalPanelWidths` measured drawer panels as content-sized, stealing the viewport-width slot from `injectPortalPanelHeights`
+  - Plugin: React fragment wrapper frame never stretched in VERTICAL parents
+  - Plugin: parent child loops called `applyChildProperties` with the outer `<SheetClose asChild>` wrapper's empty classes instead of the inner Link's classes
+- Story-side: moved the `<div className="w-full bg-primary px-4 py-2">` decorator from meta to `Default` story only, so it no longer bleeds into `Open`'s sheet rendering
+- Linked issue/PR: plugin fixes in sibling `inkbridge` repo (`component-scanner.ts`, `ui-builder.ts`, `width-solver.ts`, `tailwind.ts`, `layout-parser.ts`, `portal-panel.ts`)
+- Status: Fixed end-to-end — sheet renders 360 × 700, links stretch, arrow at right edge, no ghost hover state, decorator contained
+
 - Date: 2026-04-12
 - Component/story: Dialog / OpenPanel + Confirm (including responsive preview rows)
 - Expected: Close icon stays top-right, panel content does not clip/truncate in responsive previews
