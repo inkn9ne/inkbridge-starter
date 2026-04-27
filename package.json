@@ -58,7 +58,7 @@
     "@types/react-dom": "^19",
     "@vitest/browser-playwright": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5",
-    "inkbridge": "file:../inkbridge/tools/figma-plugin",
+    "inkbridge": "0.1.0-beta.13",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
     "tailwindcss": "^4.2.4",
@@ -66,5 +66,13 @@
     "typescript": "^5",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "inkbridge",
+      "msw",
+      "sharp"
+    ]
   }
 }
