@@ -55,7 +55,7 @@ Figma remembers this path — you only do this once per project.
 ### 3. Start the dev server
 
 ```bash
-pnpm figma:dev
+pnpm inkbridge:dev
 ```
 
 ### 4. Generate your design system
@@ -80,8 +80,8 @@ See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs
 
 | Script | What it does |
 |---|---|
-| `pnpm figma:dev` | Start Next.js dev server (required for plugin) |
-| `pnpm figma:scan` | Manually run the component scanner |
+| `pnpm inkbridge:dev` | Start Next.js dev server (required for plugin) |
+| `pnpm inkbridge:scan` | Manually run the component scanner |
 | `pnpm dev` | Start Next.js normally |
 | `pnpm storybook` | Start Storybook |
 

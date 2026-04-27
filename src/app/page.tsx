@@ -40,7 +40,7 @@ export default function Home() {
             {[
               {
                 title: "Start the dev server",
-                description: <>Run <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">pnpm figma:dev</code> in your terminal. This starts the Next.js server that the plugin uses to scan components and patch tokens.</>,
+                description: <>Run <code className="rounded bg-muted px-1 py-0.5 text-xs font-mono">pnpm inkbridge:dev</code> in your terminal. This starts the Next.js server that the plugin uses to scan components and patch tokens.</>,
               },
               {
                 title: "Load the plugin in Figma Desktop",
