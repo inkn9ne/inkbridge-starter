@@ -118,8 +118,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(@vitest/browser@4.1.0(msw@2.12.13(@types/node@20.19.37)(typescript@5.9.3))(vite@8.0.0(@types/node@20.19.37)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0))(vitest@4.1.0))(vitest@4.1.0)
       inkbridge:
-        specifier: file:../inkbridge/tools/figma-plugin
-        version: file:../inkbridge/tools/figma-plugin
+        specifier: 0.1.0-beta.13
+        version: 0.1.0-beta.13
       playwright:
         specifier: ^1.58.2
         version: 1.58.2
@@ -2417,8 +2417,8 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  inkbridge@file:../inkbridge/tools/figma-plugin:
-    resolution: {directory: ../inkbridge/tools/figma-plugin, type: directory}
+  inkbridge@0.1.0-beta.13:
+    resolution: {integrity: sha512-PRc1pw0tlvYWCXjbSoFMAdZb08TSwKmYB65rHHVwiRBGFzTwmacal4SGXPnBTcL2rHyB3ZL6MhpHbM4yqnMaUw==}
     hasBin: true
 
   internmap@2.0.3:
@@ -5893,7 +5893,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inkbridge@file:../inkbridge/tools/figma-plugin:
+  inkbridge@0.1.0-beta.13:
     dependencies:
       tailwind-merge: 3.5.0
 

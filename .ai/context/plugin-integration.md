@@ -68,6 +68,15 @@ Notes:
 
 ## Local plugin-link workflow (recommended for plugin dev)
 
+> **Committed-state rule (do not violate):** the `inkbridge` dependency in
+> `package.json` on any branch that gets pushed must resolve to a published npm
+> version (`inkbridge@beta` or a pinned `^0.1.0-beta.X`), **never**
+> `file:../inkbridge/tools/figma-plugin`. A `file:..` dep makes `pnpm install`
+> fail for anyone who clones the starter without the sibling repo at that exact
+> path. Always run `pnpm inkbridge:plugin:use-beta` before committing the
+> package.json / pnpm-lock.yaml — keep the local-link swap as an uncommitted
+> dev-only state.
+
 When iterating on plugin rendering/scanner behavior, use the sibling repo
 directly instead of publishing every test build.
 
