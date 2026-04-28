@@ -21,7 +21,7 @@ type Story = StoryObj<typeof MediaCard>;
 
 export const Docs: Story = {
   render: () => (
-    <div className="max-w-7xl w-full bg-background space-y-8 p-6">
+    <div className="max-w-7xl w-full space-y-8 p-6">
       <div>
         <p className="text-xs text-gray-500 mb-2">Default (w-64)</p>
         <MediaCard title="Default card" description="Fixed 256 px width." />
@@ -62,7 +62,7 @@ export const Default: Story = {
 
 export const Grid: Story = {
   render: () => (
-    <div className="max-w-7xl w-full bg-background grid grid-cols-3 gap-6">
+    <div className="max-w-7xl w-full grid grid-cols-3 gap-6">
       <MediaCard alt="Image 1" title="First" description="Standard card." className="w-full" />
       <MediaCard alt="Image 2" title="Second" description="Standard card." className="w-full" />
       <MediaCard alt="Image 3" title="Third" description="Standard card." className="w-full" />
@@ -72,7 +72,7 @@ export const Grid: Story = {
 
 export const ColSpan: Story = {
   render: () => (
-    <div className="max-w-7xl w-full bg-background grid grid-cols-3 gap-6">
+    <div className="max-w-7xl w-full grid grid-cols-3 gap-6">
       <MediaCard alt="Featured" title="Featured" description="Spans 2 columns." className="col-span-2 w-full" />
       <MediaCard alt="Side card" title="Side" description="1-column card." className="w-full" />
     </div>
