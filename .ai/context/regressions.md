@@ -17,34 +17,23 @@ Use this file to record starter story cases that expose scanner/renderer bugs.
 
 ## Open
 
-- Date: 2026-04-07
-- Component/story: Sonner / all stories (ToastPanel, Default, Variants, etc.)
-- Expected: Figma frames generated for all stories
-- Actual: Component appears selectable in plugin UI but no frame is created in Figma
-- Repro steps: Add `sonner.stories.tsx` with only portal-based trigger stories; run Generate Design System
-- Candidate root cause: Renderer skips frame creation when `analysis.layout.display === null`. `sonner.tsx` has no Tailwind classes (it wraps an external portal component), so `extractAllClassesFromFile` returns `[]` → `inferLayout` returns `{display: null, direction: null}`. Workaround: added non-exported `ToastItem` with Tailwind classes to `sonner.tsx` so the scanner picks up layout hints.
-- Linked issue/PR: (open in inkbridge repo — renderer should fall back to story `jsxTree` layout when component-level layout is null)
-- Status: Workaround applied in starter; root fix needed in inkbridge renderer
-
-- Date: 2026-04-07
+- Date: 2026-04-07 (re-verified 2026-04-27)
 - Component/story: Sonner / all stories
-- Expected: Sonner block placed in correct position in Organisms section
-- Actual: Sonner block overlays the Design Tokens row; secondary theme column renders empty button outlines instead of toast content
-- Repro steps: Generate design system with Sonner having multiple trigger stories (Default, Variants, etc.)
-- Candidate root cause: (1) Placement bug — Organisms section Y offset calculated before Design Tokens row height is finalized. (2) Secondary theme empty frames — ButtonPrimitive expansion fails or produces empty frames in secondary theme context when trigger stories are present.
-- Linked issue/PR: (open in inkbridge repo)
-- Status: Mostly resolved. Secondary theme renders correctly. Primary theme had stale cached frames from previous broken runs — workaround is to manually delete the Sonner block in the Primary Theme column and regenerate. Root fix needed in inkbridge: stale frames from previously broken renders should be invalidated when the component block hash changes.
-
-- Date: 2026-04-13
-- Component/story: Dialog / Confirm + responsive previews
-- Expected: Dialog content renders at correct width and height, no clipping
-- Actual: Dialog content in Confirm/responsive preview frames is clipped or misaligned (width/height flow issue)
-- Repro steps: Generate design system; inspect Dialog Confirm block at node 509:1509 in Figma
-- Candidate root cause: Stale upstream `widthOverride` leaking into dialog content panels via responsive strip/container chain in `populateStoryLayout()` → `applyFullWidthIfPossible()`. Close-icon position bug is resolved. Content sizing is the remaining issue.
-- Linked issue/PR: `feat/figma-portal-rendering` branch in inkbridge repo. Partial fixes applied (root-only grid-col extraction, removed forced 1px resize, bounded widthOverride to parent content box).
-- Status: Open — plugin-side root fix needed. Story content is not the cause; no starter story changes required.
+- Expected: Figma frame(s) generated for the Sonner stories so the toast pattern is represented in the design system
+- Actual: Sonner does not appear in the plugin's preflight list at all. Scanner filters it out before it reaches the renderer.
+- Repro steps: Generate Design System Page in Figma against the starter; observe the preflight list — no Sonner entry, no Sonner frame in the resulting page.
+- Candidate root cause: `sonner.tsx` is a thin wrapper around `SonnerToaster` from the `sonner` npm package. It has zero Tailwind classes, so `extractAllClassesFromFile` returns `[]` and the scanner now drops the component entirely (the symptom shifted from "selectable but empty frame" to "filtered out before preflight" via earlier scanner-side guards). The 2026-04-07 entry's claim of a starter-side `ToastItem` workaround is stale — `sonner.tsx` is back to the wrapper-only form.
+- Linked issue/PR: (open in inkbridge repo — scanner / renderer should generate a representative frame for storied components even when no source classes are detectable, e.g. by falling back to story-level `jsxTree` layout hints).
+- Status: Open. Two possible fixes — plugin-side root fix in the scanner / renderer fallback path, or starter-side placeholder by adding a non-exported component with Tailwind classes to `sonner.tsx`.
 
 ## Closed
+
+- Date: 2026-04-13 → resolved 2026-04-27
+- Component/story: Dialog / Confirm + responsive previews
+- Expected: Dialog content renders at correct width and height, no clipping
+- Actual (before fix): Dialog content in Confirm/responsive preview frames was clipped or misaligned (`widthOverride` leaking via responsive strip/container chain in `populateStoryLayout` → `applyFullWidthIfPossible`).
+- Resolution: `feat/figma-portal-rendering` branch was merged via PR #108 in the inkbridge repo (commit `cf82b30`), bringing in the partial fixes (root-only grid-col extraction, removed forced 1px resize, bounded `widthOverride` to parent content box). Follow-ups landed in `887c391` (responsive dialog/footer + hero centering), `4b79b03` (Sheet drawer width + stretch cascade), and the more recent symbol-resolution / responsive-cascade commits. Re-verified in Figma on 2026-04-27 — Dialog Confirm and responsive previews render at the correct sizes.
+- Status: Closed. No starter changes required.
 
 - Date: 2026-04-24
 - Component/story: MobileNav / Open (Sheet drawer with nav Links)
