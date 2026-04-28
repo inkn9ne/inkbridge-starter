@@ -8,7 +8,7 @@ optional local-link mode for faster plugin iteration.
 1. Install dependencies:
    - `pnpm install`
 2. Start dev server:
-   - `pnpm figma:dev`
+   - `pnpm inkbridge:dev`
 3. In Figma Desktop, import plugin manifest from:
    - `node_modules/inkbridge/manifest.json`
 4. Run plugin command:
@@ -19,25 +19,25 @@ optional local-link mode for faster plugin iteration.
 Use the command from the repo that owns it:
 
 - In `inkbridge-starter`:
-  - `pnpm figma:dev` → start starter app (scanner from installed package)
-  - `pnpm figma:dev:local` → start starter app with `INKBRIDGE_LOCAL=1` (scanner TS from sibling `../inkbridge`)
+  - `pnpm inkbridge:dev` → start starter app (scanner from installed package)
+  - `pnpm inkbridge:dev:local` → start starter app with `INKBRIDGE_LOCAL=1` (scanner TS from sibling `../inkbridge`)
 - In `inkbridge` (repo root):
-  - `pnpm figma:watch` → watch/build plugin `code.js` continuously
-  - `pnpm figma:build` → one-off plugin build
-- In `inkbridge/tools/figma-plugin-tailwind-tokens`:
-  - `pnpm run watch` → same as root `pnpm figma:watch`, but from plugin dir
-  - `pnpm run build` → same as root `pnpm figma:build`, but from plugin dir
+  - `pnpm inkbridge:watch` → watch/build plugin `code.js` continuously
+  - `pnpm inkbridge:build` → one-off plugin build
+- In `inkbridge/tools/figma-plugin`:
+  - `pnpm run watch` → same as root `pnpm inkbridge:watch`, but from plugin dir
+  - `pnpm run build` → same as root `pnpm inkbridge:build`, but from plugin dir
 
 Important:
 - `pnpm watch` at `inkbridge` root fails (`watch` script does not exist there).
-- Use `pnpm figma:watch` at root, or `pnpm run watch` inside plugin dir.
+- Use `pnpm inkbridge:watch` at root, or `pnpm run watch` inside plugin dir.
 
 ## Rebuild rules (when required)
 
 - If you changed only starter stories/components/styles:
   - no plugin rebuild needed; regenerate in Figma is enough.
 - If you changed plugin source (`ui-builder.ts`, `story-builder.ts`, renderer logic):
-  - rebuild is required (`pnpm figma:build`) or keep `pnpm figma:watch` running.
+  - rebuild is required (`pnpm inkbridge:build`) or keep `pnpm inkbridge:watch` running.
 - If Figma plugin is imported from the `inkbridge` repo manifest path:
   - watcher/build updates are picked up from that manifest source.
 - If Figma plugin is imported from starter `node_modules/inkbridge/manifest.json`:
@@ -46,11 +46,11 @@ Important:
 ## Scanner contract
 
 The plugin reads component defs from starter stories. The scan is triggered by the
-Figma plugin via `GET /api/figma/scan-components`, which spawns the scanner CLI.
+Figma plugin via `GET /api/inkbridge/scan-components`, which spawns the scanner CLI.
 
 Two dev server modes:
-- `pnpm figma:dev` → uses installed `node_modules/inkbridge/scanner/cli.ts` (released/beta builds)
-- `pnpm figma:dev:local` → sets `INKBRIDGE_LOCAL=1`; API route uses `../inkbridge/tools/figma-plugin-tailwind-tokens/scanner/cli.ts` directly (plugin dev — no reinstall needed)
+- `pnpm inkbridge:dev` → uses installed `node_modules/inkbridge/scanner/cli.ts` (released/beta builds)
+- `pnpm inkbridge:dev:local` → sets `INKBRIDGE_LOCAL=1`; API route uses `../inkbridge/tools/figma-plugin/scanner/cli.ts` directly (plugin dev — no reinstall needed)
 
 Runtime scan endpoint selection (inside the plugin UI):
 - First reachable wins: `localhost:3000` → `localhost:4000` → `localhost:5173`.
@@ -59,8 +59,8 @@ Runtime scan endpoint selection (inside the plugin UI):
   `node_modules/inkbridge/manifest.json`, it can end up scanning the wrong app.
 
 Manual scan scripts (for debugging outside Figma):
-- `pnpm figma:scan` → same as figma:dev, from installed copy
-- `pnpm figma:scan:local` → same as figma:dev:local, from inkbridge source
+- `pnpm inkbridge:scan` → same as inkbridge:dev, from installed copy
+- `pnpm inkbridge:scan:local` → same as inkbridge:dev:local, from inkbridge source
 
 Notes:
 - Story coverage directly affects what appears in generated Figma frames.
@@ -68,35 +68,44 @@ Notes:
 
 ## Local plugin-link workflow (recommended for plugin dev)
 
+> **Committed-state rule (do not violate):** the `inkbridge` dependency in
+> `package.json` on any branch that gets pushed must resolve to a published npm
+> version (`inkbridge@beta` or a pinned `^0.1.0-beta.X`), **never**
+> `file:../inkbridge/tools/figma-plugin`. A `file:..` dep makes `pnpm install`
+> fail for anyone who clones the starter without the sibling repo at that exact
+> path. Always run `pnpm inkbridge:plugin:use-beta` before committing the
+> package.json / pnpm-lock.yaml — keep the local-link swap as an uncommitted
+> dev-only state.
+
 When iterating on plugin rendering/scanner behavior, use the sibling repo
 directly instead of publishing every test build.
 
 Scripts:
-- `pnpm figma:plugin:which` — show current `inkbridge` source/version
-- `pnpm figma:plugin:use-local` — point starter to `file:../inkbridge/tools/figma-plugin-tailwind-tokens`
-- `pnpm figma:plugin:use-beta` — switch back to npm `beta` dist-tag
+- `pnpm inkbridge:plugin:which` — show current `inkbridge` source/version
+- `pnpm inkbridge:plugin:use-local` — point starter to `file:../inkbridge/tools/figma-plugin`
+- `pnpm inkbridge:plugin:use-beta` — switch back to npm `beta` dist-tag
 
 Install freshness rule (important):
-- Default relink command: `pnpm figma:plugin:use-local`
-- Recovery for stale local package/cache only: `pnpm add -D inkbridge@file:../inkbridge/tools/figma-plugin-tailwind-tokens --force`
+- Default relink command: `pnpm inkbridge:plugin:use-local`
+- Recovery for stale local package/cache only: `pnpm add -D inkbridge@file:../inkbridge/tools/figma-plugin --force`
 - Do not use `--force` for every run; use it only when plugin changes are not reflected in Figma after a normal relink.
 
 Suggested loop (plugin dev):
 1. In `../inkbridge`, edit plugin source and run `npm run build` (compiles `code.js`).
-2. In starter, run `pnpm figma:plugin:use-local` to relink the installed `code.js`.
-3. Start starter with `pnpm figma:dev:local` — scanner changes are always live, no reinstall needed.
+2. In starter, run `pnpm inkbridge:plugin:use-local` to relink the installed `code.js`.
+3. Start starter with `pnpm inkbridge:dev:local` — scanner changes are always live, no reinstall needed.
 4. Validate in Figma.
-5. After publish, switch back: `pnpm figma:plugin:use-beta` then restart with `pnpm figma:dev`.
+5. After publish, switch back: `pnpm inkbridge:plugin:use-beta` then restart with `pnpm inkbridge:dev`.
 
 Important:
-- `pnpm figma:dev:local` makes scanner code live from sibling `inkbridge`.
+- `pnpm inkbridge:dev:local` makes scanner code live from sibling `inkbridge`.
 - It does **not** replace the already-imported Figma manifest source. Keep using
   starter’s `node_modules/inkbridge/manifest.json` when validating starter scans.
 
 ## Stable vs WIP lanes (2026-03-30 checkpoint)
 
 To avoid losing context and to stop patch-on-patch instability, we keep two local
-plugin lanes in `../inkbridge/tools/figma-plugin-tailwind-tokens`:
+plugin lanes in `../inkbridge/tools/figma-plugin`:
 
 - Stable lane:
   - Branch: `stable/plugin-ba1620f`
@@ -121,18 +130,18 @@ Operational rule:
 
 Local switch commands:
 - Switch plugin repo lane:
-  - `cd ../inkbridge/tools/figma-plugin-tailwind-tokens`
+  - `cd ../inkbridge/tools/figma-plugin`
   - `git switch stable/plugin-ba1620f` or `git switch wip/plugin-stabilization-poc-2026-03-30`
 - Re-link starter after switching:
   - `cd ../../inkbridge-starter`
-  - `pnpm figma:plugin:use-local`
-  - if stale, retry once with: `pnpm add -D inkbridge@file:../inkbridge/tools/figma-plugin-tailwind-tokens --force`
+  - `pnpm inkbridge:plugin:use-local`
+  - if stale, retry once with: `pnpm add -D inkbridge@file:../inkbridge/tools/figma-plugin --force`
 
 ## Versioning / updates
 
 - Starter should pin and bump `inkbridge` intentionally.
 - When bumping plugin version:
-  - re-run `pnpm figma:scan`
+  - re-run `pnpm inkbridge:scan`
   - regenerate in Figma
   - record regressions in `context/regressions.md`
 

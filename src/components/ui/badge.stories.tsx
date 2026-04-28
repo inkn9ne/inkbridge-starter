@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Badge } from "./badge";
 
 const meta: Meta<typeof Badge> = {
-  title: "Atoms/Badge",
+  title: "components/ui/Badge",
   component: Badge,
   parameters: {
     layout: "centered",
@@ -21,6 +21,7 @@ export const Variants: Story = {
       <Badge variant="default">Default</Badge>
       <Badge variant="secondary">Secondary</Badge>
       <Badge variant="outline">Outline</Badge>
+      <Badge variant="soft">Soft</Badge>
       <Badge variant="destructive">Destructive</Badge>
       <Badge variant="ghost">Ghost</Badge>
     </div>
