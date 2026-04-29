@@ -12,8 +12,8 @@ Out of scope:
 - Figma plugin architecture decisions that belong in the main `inkbridge` repo
 
 Cross-repo source of truth:
-- Core plugin docs live in sibling repo: `../inkbridge/.ai/`
-- Primary references:
+- **Plugin internals** (scanner, IR, rendering): `../inkbridge/tools/figma-plugin/.ai/` — auto-loaded via the `inkbridge-figma-plugin` Claude skill (symlinked into `.claude/skills/`).
+- **Website / integration context** (token sync API, release flow): `../inkbridge/.ai/`
   - `../inkbridge/.ai/agents/figma.md`
   - `../inkbridge/.ai/context/figma-tokens.md`
 
