@@ -4,7 +4,7 @@
 
 1. Read [`README.md`](./README.md) for scope boundaries.
 2. Check [`context/component-coverage.md`](./context/component-coverage.md) before adding components/stories.
-3. If work touches plugin behavior, cross-check sibling docs in `../inkbridge/.ai/`.
+3. If work touches plugin behavior, the canonical plugin docs are at `../inkbridge/tools/figma-plugin/.ai/` (auto-loaded via the `inkbridge-figma-plugin` Claude skill, symlinked into `.claude/skills/`).
 
 ## Current priorities
 
