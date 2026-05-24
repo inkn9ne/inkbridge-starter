@@ -45,4 +45,5 @@ storybook-static
 
 # Inkbridge scanner output
 .inkbridge/
-tools/figma-plugin-tailwind-tokens/component-definitions.json
+**/component-definitions.json
+**/component-definitions.debug.json
