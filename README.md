@@ -55,7 +55,7 @@ Figma remembers this path — you only do this once per project.
 ### 3. Start the dev server
 
 ```bash
-pnpm inkbridge:dev
+pnpm dev
 ```
 
 ### 4. Generate your design system
@@ -80,10 +80,17 @@ See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs
 
 | Script | What it does |
 |---|---|
-| `pnpm inkbridge:dev` | Start Next.js dev server (required for plugin) |
-| `pnpm inkbridge:scan` | Manually run the component scanner |
-| `pnpm dev` | Start Next.js normally |
+| `pnpm dev` | Start Next.js dev server (the plugin runs through API routes served by this) |
+| `pnpm build` | Build for production |
 | `pnpm storybook` | Start Storybook |
+
+The plugin works through the API routes via `pnpm dev` — no plugin-specific scripts needed. If you're developing the `inkbridge` plugin source itself (sibling `../inkbridge/` checkout) and want the local-link toggle scripts, run:
+
+```bash
+pnpm exec inkbridge setup --dev
+```
+
+That adds `inkbridge:plugin:which`, `inkbridge:plugin:use-beta`, `inkbridge:plugin:use-local`, `inkbridge:dev:local`, and `inkbridge:scan:local` to your local `package.json`.
 
 ---
 

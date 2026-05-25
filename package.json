@@ -10,14 +10,7 @@
     "build": "next build",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "inkbridge:dev": "next dev",
-    "inkbridge:dev:local": "INKBRIDGE_LOCAL=1 next dev",
-    "inkbridge:scan": "tsx node_modules/inkbridge/scanner/cli.ts",
-    "inkbridge:scan:local": "tsx ../inkbridge/tools/figma-plugin/scanner/cli.ts",
-    "inkbridge:plugin:which": "node -e \"const p=require('./package.json'); console.log('inkbridge =>', (p.devDependencies&&p.devDependencies.inkbridge)||(p.dependencies&&p.dependencies.inkbridge)||'not-set')\"",
-    "inkbridge:plugin:use-beta": "pnpm add -D inkbridge@beta",
-    "inkbridge:plugin:use-local": "pnpm add -D inkbridge@file:../inkbridge/tools/figma-plugin"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
