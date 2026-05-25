@@ -51,7 +51,7 @@
     "@types/react-dom": "^19",
     "@vitest/browser-playwright": "^4.1.5",
     "@vitest/coverage-v8": "^4.1.5",
-    "inkbridge": "0.1.0-beta.24",
+    "inkbridge": "0.1.0-beta.25",
     "playwright": "^1.59.1",
     "storybook": "^10.3.5",
     "tailwindcss": "^4.2.4",
