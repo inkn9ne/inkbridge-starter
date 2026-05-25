@@ -138,6 +138,13 @@ function patchCssVariables(cssText: string, updatesByTheme: ThemeUpdateMap): str
 }
 
 export async function POST(request: Request) {
+  // Production guard. The Figma plugin only ever calls this on localhost
+  // during design work; exposing it on a deployed app adds a DoS vector
+  // (postcss-parses arbitrary `cssText`, CORS `*`, no auth). Return 404
+  // (rather than 403) so the route looks missing — no signal to attackers.
+  if (process.env.NODE_ENV === 'production') {
+    return new NextResponse(null, { status: 404 });
+  }
   try {
     const payload = await request.json();
     const cssText = typeof payload?.cssText === 'string' ? payload.cssText : '';
