@@ -3,12 +3,28 @@
 This repo uses the `inkbridge` npm package as the Figma plugin source, with an
 optional local-link mode for faster plugin iteration.
 
+## Prerequisite for maintainer workflow
+
+The committed starter ships with **no** `inkbridge:*` scripts in `package.json`
+so normal users get a clean template. Every command below that starts with
+`pnpm inkbridge:dev:local`, `pnpm inkbridge:scan:local`, `pnpm inkbridge:plugin:*`
+requires you to first run:
+
+```bash
+pnpm exec inkbridge setup --dev
+```
+
+That adds the five maintainer scripts (`inkbridge:plugin:which`,
+`:use-beta`, `:use-local`, `inkbridge:dev:local`, `inkbridge:scan:local`) to
+your local `package.json`. Don't commit them — they reference
+`../inkbridge/` which doesn't exist for normal users.
+
 ## Local workflow
 
 1. Install dependencies:
    - `pnpm install`
 2. Start dev server:
-   - `pnpm inkbridge:dev`
+   - `pnpm dev`
 3. In Figma Desktop, import plugin manifest from:
    - `node_modules/inkbridge/manifest.json`
 4. Run plugin command:
@@ -19,8 +35,8 @@ optional local-link mode for faster plugin iteration.
 Use the command from the repo that owns it:
 
 - In `inkbridge-starter`:
-  - `pnpm inkbridge:dev` → start starter app (scanner from installed package)
-  - `pnpm inkbridge:dev:local` → start starter app with `INKBRIDGE_LOCAL=1` (scanner TS from sibling `../inkbridge`)
+  - `pnpm dev` → start starter app (scanner from installed package)
+  - `pnpm inkbridge:dev:local` → start starter app with `INKBRIDGE_LOCAL=1` (scanner TS from sibling `../inkbridge`) — requires `inkbridge setup --dev` first
 - In `inkbridge` (repo root):
   - `pnpm inkbridge:watch` → watch/build plugin `code.js` continuously
   - `pnpm inkbridge:build` → one-off plugin build
@@ -49,8 +65,8 @@ The plugin reads component defs from starter stories. The scan is triggered by t
 Figma plugin via `GET /api/inkbridge/scan-components`, which spawns the scanner CLI.
 
 Two dev server modes:
-- `pnpm inkbridge:dev` → uses installed `node_modules/inkbridge/scanner/cli.ts` (released/beta builds)
-- `pnpm inkbridge:dev:local` → sets `INKBRIDGE_LOCAL=1`; API route uses `../inkbridge/tools/figma-plugin/scanner/cli.ts` directly (plugin dev — no reinstall needed)
+- `pnpm dev` → uses installed `node_modules/inkbridge/scanner/cli.ts` (released/beta builds)
+- `pnpm inkbridge:dev:local` → sets `INKBRIDGE_LOCAL=1`; API route uses `../inkbridge/tools/figma-plugin/scanner/cli.ts` directly (plugin dev — no reinstall needed; requires `inkbridge setup --dev`)
 
 Runtime scan endpoint selection (inside the plugin UI):
 - First reachable wins: `localhost:3000` → `localhost:4000` → `localhost:5173`.
@@ -58,9 +74,9 @@ Runtime scan endpoint selection (inside the plugin UI):
 - If the plugin is imported from `../inkbridge` manifest instead of starter
   `node_modules/inkbridge/manifest.json`, it can end up scanning the wrong app.
 
-Manual scan scripts (for debugging outside Figma):
-- `pnpm inkbridge:scan` → same as inkbridge:dev, from installed copy
-- `pnpm inkbridge:scan:local` → same as inkbridge:dev:local, from inkbridge source
+Manual scan (for debugging outside Figma):
+- `pnpm tsx node_modules/inkbridge/scanner/cli.ts` → uses installed copy
+- `pnpm inkbridge:scan:local` → uses inkbridge source (requires `inkbridge setup --dev`)
 
 Notes:
 - Story coverage directly affects what appears in generated Figma frames.
@@ -95,7 +111,7 @@ Suggested loop (plugin dev):
 2. In starter, run `pnpm inkbridge:plugin:use-local` to relink the installed `code.js`.
 3. Start starter with `pnpm inkbridge:dev:local` — scanner changes are always live, no reinstall needed.
 4. Validate in Figma.
-5. After publish, switch back: `pnpm inkbridge:plugin:use-beta` then restart with `pnpm inkbridge:dev`.
+5. After publish, switch back: `pnpm inkbridge:plugin:use-beta` then restart with `pnpm dev`.
 
 Important:
 - `pnpm inkbridge:dev:local` makes scanner code live from sibling `inkbridge`.
@@ -141,8 +157,7 @@ Local switch commands:
 
 - Starter should pin and bump `inkbridge` intentionally.
 - When bumping plugin version:
-  - re-run `pnpm inkbridge:scan`
-  - regenerate in Figma
+  - regenerate in Figma (the scan runs automatically via the API route)
   - record regressions in `context/regressions.md`
 
 ## Source-of-truth split
