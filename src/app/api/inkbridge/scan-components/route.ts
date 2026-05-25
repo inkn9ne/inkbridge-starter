@@ -30,6 +30,14 @@ const CORS = {
 };
 
 export async function GET(request: Request) {
+  // Production guard. The Figma plugin only ever calls this on localhost
+  // during design work; exposing it on a deployed app adds a DoS vector
+  // (every call spawns `tsx` running the scanner — CPU-heavy, no rate
+  // limit, CORS `*`) and discloses component-definition JSON. Return 404
+  // (rather than 403) so the route looks missing — no signal to attackers.
+  if (process.env.NODE_ENV === 'production') {
+    return new NextResponse(null, { status: 404 });
+  }
   try {
     const url = new URL(request.url);
     const rawTokenSourceMode = (url.searchParams.get('tokenSourceMode') || 'css').trim().toLowerCase();
