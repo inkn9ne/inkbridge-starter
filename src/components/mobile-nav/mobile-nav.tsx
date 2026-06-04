@@ -27,8 +27,11 @@ export function MobileNav({ defaultOpen }: { defaultOpen?: boolean } = {}) {
           <HiMenu className="size-5" />
         </SheetTrigger>
 
-        {/* Full-screen drawer — w-full overrides the default w-3/4 via twMerge */}
-        <SheetContent side="right" aria-describedby={undefined} hideClose className="w-full p-0 flex flex-col gap-0">
+        {/* Full-screen drawer — sm:max-w-full neutralises the primitive's
+            sm:max-w-sm cap (24rem) at sm+, letting w-full actually win at
+            every viewport. Without it, the outer logo + hamburger from the
+            parent flex bleed through the dim overlay on viewports ≥ 640px. */}
+        <SheetContent side="right" aria-describedby={undefined} hideClose className="w-full sm:max-w-full p-0 flex flex-col gap-0">
           <SheetHeader className="sr-only">
             <SheetTitle>Navigation</SheetTitle>
           </SheetHeader>
