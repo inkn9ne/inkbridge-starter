@@ -1,0 +1,7 @@
+{
+  "componentPaths": [
+    "src"
+  ],
+  "exclude": [],
+  "onlyWithStories": true
+}
