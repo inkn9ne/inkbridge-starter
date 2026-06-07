@@ -18,40 +18,41 @@ type Story = StoryObj<typeof meta>;
 // enough parent width to actually hit the 560px cap.
 const WIDTH_WRAPPER = "w-full max-w-[560px]";
 
-// Args-only (no render) so the scanner wires args directly as propsContext.
-// `className` puts the slider in a responsive desktop-sized frame that still
-// shrinks at mobile breakpoints.
+// Pure args, no controlled state — slider owns its value via internal
+// `useState(defaultValue)`. The Inkbridge scanner traces that
+// useState seed back to the `defaultValue` arg below and renders the
+// initial display in Figma. Storybook updates the displayed number as
+// the user drags.
 export const Default: Story = {
   args: {
-    display: "5.0x",
-    sliderValue: 5,
+    defaultValue: 5,
     min: 1.1,
     max: 100,
-    showInput: false,
     className: WIDTH_WRAPPER,
   },
 };
 
 export const WithMarks: Story = {
   args: {
-    display: "50.0x",
-    sliderValue: 50,
+    defaultValue: 50,
     min: 1.1,
     max: 100,
     marks: ["1x", "25x", "50x", "75x", "100x"],
-    showInput: false,
     className: WIDTH_WRAPPER,
   },
 };
 
+// defaultValue + min are aligned so the thumb starts at the visible
+// left edge and the display reads "1x". An earlier draft had
+// `defaultValue: 1, min: 1.1`, but the browser clamps the thumb up to
+// min while React keeps `value=1` — the headline number and the
+// thumb position drift apart.
 export const Disabled: Story = {
   args: {
-    display: "1.0x",
-    sliderValue: 1,
-    min: 1.1,
+    defaultValue: 1,
+    min: 1,
     max: 100,
     disabled: true,
-    showInput: false,
     className: WIDTH_WRAPPER,
   },
 };
