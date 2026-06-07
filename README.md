@@ -1,24 +1,42 @@
 # Inkbridge Starter
 
-A minimal Next.js + Tailwind CSS + Storybook project pre-configured with [Inkbridge](https://inkbridge.io) — so you can generate a pixel-accurate design system in Figma in minutes, without writing any components first.
+A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.io). Ships with a full shadcn/ui v4 build (27 primitives) plus a real-world Perps feature module — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial feature components, not just isolated primitives.
 
 ## What's included
 
-- **Next.js 15** (App Router, TypeScript)
-- **Tailwind CSS v4** + shadcn/ui components
+- **Next.js 16** (App Router, TypeScript)
+- **Tailwind CSS v4** + the full shadcn/ui v4 component set
 - **Storybook** with stories for every component
 - **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
+- **Multi-theme tokens** — `default` (green primary) and `secondary` (blue primary) themes in [`src/app/globals.css`](src/app/globals.css), demonstrating theme switching in Storybook and the Figma plugin's theme-selector preflight panel
+- **Perps feature module** — three connected components (slider + two modals) showing how a feature surface composes shadcn primitives into something realistic
 
-### Demo components
+## Components
 
-| Component | Type |
+### UI primitives (`src/components/ui/`)
+
+shadcn/ui v4 — all 27 primitives with stories. Inkbridge classifies each into its rendering strategy automatically (CVA variant set, compound, state-machine, or simple).
+
+| Category | Components |
 |---|---|
-| Button | CVA variants (default / secondary / outline / ghost / destructive / link) + sizes |
-| Card | Compound (header / title / description / content / footer) |
-| Badge | CVA variants |
-| Input | States (default / disabled / invalid) |
-| Alert | CVA variants (default / destructive) |
-| Gradient Showcase | Gradient rendering demo (linear / radial / 3-stop / blob) |
+| Forms | Button, Input, Label, Checkbox, RadioGroup, Switch, Select, Form |
+| Display | Badge, Card, InfoCard, Separator, Table |
+| Feedback | Alert, Sonner (toasts) |
+| Overlays | Dialog, Drawer, Sheet, Popover, Tooltip, DropdownMenu |
+| Navigation | Breadcrumb, Pagination, Tabs, Accordion, ScrollArea |
+| Data viz | Chart |
+
+### Perps feature module (`src/feature/perps/`)
+
+A realistic feature surface ported from a production perpetuals trading app. Demonstrates how Inkbridge handles consumer-side composition — feature components that wrap shadcn primitives, share a domain layer (types + constants + utility helpers), and live in their own colocated folder.
+
+| Component | Stories | Plugin features exercised |
+|---|---|---|
+| LeverageSlider | Default, WithMarks, Disabled | Native `<input type="range">` rewrite, plugin-driven icon registry, react-icons inside an args-only story |
+| DecreasePositionModal | Default, EntirePositionToggled, NoPositionSelected | Dialog portal, Select with dynamic items via `.map()`, conditional sub-tree, sibling-button flex row constraints |
+| IncreasePositionModal | OpenLong, OpenShort, IncreaseExistingLong, InsufficientBalance, PreviewLoading, Disconnected | Embedded LeverageSlider, inline SVG icons, gradient submit button, multi-state preview pane, `<form>` width chain |
+
+Layout convention: `src/feature/<feature>/{types,constants,utils}.ts` + `src/feature/<feature>/components/*.{tsx,stories.tsx}` — copy this shape when adding your own feature module.
 
 ---
 
@@ -62,17 +80,17 @@ pnpm dev
 
 In Figma: **Plugins → Development → Inkbridge → Generate Design System Page**
 
-The plugin scans your Storybook stories and builds a "Design System" page with all components rendered as native Figma frames.
+The plugin scans your Storybook stories and builds a "Design System" page with all components rendered as native Figma frames. The preflight panel that pops up first lets you pick which themes and which components to (re)build for this run.
 
 ---
 
 ## Adding your own components
 
-1. Create a component in `src/components/`
-2. Add a `.stories.tsx` file alongside it
-3. Re-run **Generate Design System Page** — it always reflects the current state
+1. Create a component in `src/components/ui/` (primitive) or `src/feature/<feature>/components/` (feature surface)
+2. Add a `.stories.tsx` file alongside it — args-only stories work great, the scanner inlines the component body
+3. Re-run **Generate Design System Page** — it incrementally updates only what changed
 
-See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs) for full documentation.
+See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs) for full documentation, including the conventions for layouts, responsive previews, state matrices, and CVA variant detection.
 
 ---
 
@@ -80,7 +98,7 @@ See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs
 
 | Script | What it does |
 |---|---|
-| `pnpm dev` | Start Next.js dev server (the plugin runs through API routes served by this) |
+| `pnpm dev` | Start Next.js dev server (the plugin connects to API routes served by this) |
 | `pnpm build` | Build for production |
 | `pnpm storybook` | Start Storybook |
 
@@ -101,10 +119,12 @@ Edit `inkbridge.config.json` to control which paths the scanner searches:
 ```json
 {
   "componentPaths": ["src"],
-  "exclude": ["stories", "storybook-static"],
+  "exclude": [],
   "onlyWithStories": true
 }
 ```
+
+`onlyWithStories: true` is recommended — Inkbridge renders what you've actually written stories for, not every TSX file in `src/`.
 
 ---
 
