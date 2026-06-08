@@ -23,7 +23,7 @@ shadcn/ui v4 — all 27 primitives with stories. Inkbridge classifies each into 
 | Category | Components |
 |---|---|
 | Forms | Button, Input, Label, Checkbox, RadioGroup, Switch, Select, Form |
-| Display | Badge, Card, InfoCard, Separator, Table |
+| Display | Badge, Card, Separator, Table |
 | Feedback | Alert, Sonner (toasts) |
 | Overlays | Dialog, Drawer, Sheet, Popover, Tooltip, DropdownMenu |
 | Navigation | Breadcrumb, Pagination, Tabs, Accordion, ScrollArea |
