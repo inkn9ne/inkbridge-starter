@@ -121,8 +121,8 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       inkbridge:
-        specifier: 0.1.0-beta.27
-        version: 0.1.0-beta.27(postcss@8.5.12)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(tailwindcss@4.2.4)
+        specifier: 0.1.0-beta.28
+        version: 0.1.0-beta.28(postcss@8.5.12)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(tailwindcss@4.2.4)
       playwright:
         specifier: ^1.59.1
         version: 1.59.1
@@ -2452,8 +2452,8 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  inkbridge@0.1.0-beta.27:
-    resolution: {integrity: sha512-aANCd2n9dmq5y+hHU33sJOR89dpucW1gxE+JMVKyXJMzYu0N1AqJaSQkP5Gu7pPe1LP3Fz/4jexCt206vBbVQQ==}
+  inkbridge@0.1.0-beta.28:
+    resolution: {integrity: sha512-PafS+CryD5iXjmVYjXHx+oyPoeT22WO2gShsUjF/gzb54VsjHu+dvXaf73wRAFU93IgEupOiCVgv2XxZFx/2nw==}
     hasBin: true
     peerDependencies:
       postcss: '>=8'
@@ -5919,7 +5919,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inkbridge@0.1.0-beta.27(postcss@8.5.12)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(tailwindcss@4.2.4):
+  inkbridge@0.1.0-beta.28(postcss@8.5.12)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(tailwindcss@4.2.4):
     dependencies:
       postcss: 8.5.12
       react: 19.2.5

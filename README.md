@@ -10,7 +10,7 @@ A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](h
 - **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
 - **Multi-theme tokens** — `default` (green primary) and `secondary` (blue primary) themes in [`src/app/globals.css`](src/app/globals.css), demonstrating theme switching in Storybook and the Figma plugin's theme-selector preflight panel
 - **Perps feature module** — three connected components (slider + two modals) showing how a feature surface composes shadcn primitives into something realistic
-- **In-app component catalogue** — a `/docs` route (hub + per-component pages) generated from your stories at build time, plus a marketing home that doubles as an overview
+- **In-app component catalogue** — a `/docs` route (hub + per-component pages with live previews) generated from your stories at build time, plus a marketing home that doubles as an overview
 
 Components live in two buckets: `src/components/ui/` (vendored shadcn primitives) and `src/components/custom/` (your own shared components); feature surfaces stay under `src/feature/<feature>/`.
 
