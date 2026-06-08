@@ -5,6 +5,7 @@ import { Button } from "./button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs"
 
 const meta: Meta<typeof Tabs> = {
+  title: "Components/UI/Tabs",
   component: Tabs,
   args: {
     defaultValue: "overview",

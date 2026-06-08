@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { HiMenu } from "react-icons/hi";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ThemeSwitcher } from "@/components/custom/theme";
 import { MobileNavLinks } from "./mobile-nav-links";
 
 export function MobileNav({ defaultOpen }: { defaultOpen?: boolean } = {}) {
@@ -57,17 +57,9 @@ export function MobileNav({ defaultOpen }: { defaultOpen?: boolean } = {}) {
             <MobileNavLinks />
           </div>
 
-          {/* Bottom — login + version */}
-          <div className="border-t px-4 pt-4 pb-6 flex flex-col gap-2 shrink-0 bg-muted/20">
-            <SheetClose asChild>
-              <Link
-                href="/login"
-                className="flex items-center justify-center rounded-xl border bg-background px-4 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors"
-              >
-                Login
-              </Link>
-            </SheetClose>
-            <p className="text-center text-[10px] text-muted-foreground mt-1">
+          {/* Bottom — version */}
+          <div className="border-t px-4 pt-4 pb-6 shrink-0 bg-muted/20">
+            <p className="text-center text-[10px] text-muted-foreground">
               Inkbridge — Figma plugin for Tailwind React
             </p>
           </div>

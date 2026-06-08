@@ -1,10 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ThemeSwitcher } from "@/components/custom/theme";
 import { NavLinks } from "./nav-links";
-
-const navLinkCls =
-  "rounded-md px-3 py-1.5 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10 transition-colors";
 
 function NavLogo() {
   return (
@@ -24,9 +21,6 @@ export function NavBarGuestView() {
       </div>
       <div className="flex items-center gap-3">
         <ThemeSwitcher />
-        <Link href="/login" className={navLinkCls}>
-          Login
-        </Link>
       </div>
     </div>
   );

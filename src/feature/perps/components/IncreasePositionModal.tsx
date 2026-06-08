@@ -43,13 +43,13 @@ export interface IncreasePositionModalProps {
   balancesLoading: boolean;
   inputWalletBalance: number | null;
   isLongSide: boolean;
-  leverageDisplay: string;
-  leverageSliderValue: number;
+  /** Initial leverage value for the slider's internal state. The slider renders the headline itself; the scanner traces this prop through useState for Figma. */
+  defaultLeverage: number;
+  /** Observer fired on every leverage change — parent can recompute preview values. */
+  onLeverageChange?: (value: number) => void;
   leverageMarks: string[];
   maxLeverage: number;
   sizeUsdPreview: number | null;
-  onAdjustLeverage: (delta: number) => void;
-  onLeverageSliderChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   collateralLimitsError: string | null;
   status: string | null;
   loading: boolean;
@@ -77,13 +77,11 @@ export function IncreasePositionModal({
   balancesLoading,
   inputWalletBalance,
   isLongSide,
-  leverageDisplay,
-  leverageSliderValue,
+  defaultLeverage,
+  onLeverageChange,
   leverageMarks,
   maxLeverage,
   sizeUsdPreview,
-  onAdjustLeverage,
-  onLeverageSliderChange,
   collateralLimitsError,
   status,
   loading,
@@ -291,14 +289,12 @@ export function IncreasePositionModal({
             </div>
 
             <LeverageSlider
-              display={leverageDisplay}
-              sliderValue={leverageSliderValue}
+              defaultValue={defaultLeverage}
               marks={leverageMarks}
               min={MIN_LEVERAGE}
               max={maxLeverage}
               step={0.1}
-              onAdjust={onAdjustLeverage}
-              onSliderChange={onLeverageSliderChange}
+              onChange={onLeverageChange}
               showInput={false}
               inputPosition="after-children"
             >

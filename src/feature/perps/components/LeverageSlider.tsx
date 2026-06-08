@@ -7,25 +7,21 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 export interface LeverageSliderProps {
-  title?: string;
-  display: string;
-  sliderValue: number;
+  /** Initial slider value. Also drives the headline display in Figma — the scanner traces `useState(defaultValue)` and substitutes the value into `{value}x` for static rendering. */
+  defaultValue?: number;
+  /** Fires every time the value changes (slider drag, +/- buttons, input). */
+  onChange?: (value: number) => void;
   min: number;
   max: number;
   step?: number;
+  /** Step applied per −/+ button click. Defaults to `step`. */
+  adjustStep?: number;
   marks?: string[];
   disabled?: boolean;
-  onAdjust?: (delta: number) => void;
-  onSliderChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   inputId?: string;
   inputLabel?: string;
-  inputValue?: string;
-  inputMin?: number;
-  inputMax?: number;
-  inputStep?: string | number;
-  inputPlaceholder?: string;
-  onInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   inputHelp?: React.ReactNode;
+  inputPlaceholder?: string;
   showInput?: boolean;
   inputPosition?: "before-children" | "after-children";
   footer?: React.ReactNode;
@@ -35,34 +31,45 @@ export interface LeverageSliderProps {
 }
 
 export function LeverageSlider({
-  title = "Leverage",
-  display,
-  sliderValue,
+  defaultValue,
+  onChange,
   min,
   max,
   step = 0.1,
+  adjustStep,
   marks,
   disabled = false,
-  onAdjust,
-  onSliderChange,
   inputId,
   inputLabel = "Leverage",
-  inputValue,
-  inputMin,
-  inputMax,
-  inputStep = "0.1",
-  inputPlaceholder,
-  onInputChange,
   inputHelp,
-  showInput = true,
+  inputPlaceholder,
+  showInput = false,
   inputPosition = "after-children",
   footer,
   className,
   inputClassName,
   children,
 }: LeverageSliderProps) {
-  const shouldShowInput = showInput && Boolean(onInputChange);
-  const inputRow = shouldShowInput ? (
+  const [value, setValue] = React.useState<number>(defaultValue ?? min);
+  const effectiveAdjustStep = adjustStep ?? step;
+
+  const updateValue = (next: number): void => {
+    const clamped = Math.min(max, Math.max(min, next));
+    setValue(clamped);
+    onChange?.(clamped);
+  };
+
+  const handleAdjust = (delta: number): void => updateValue(value + delta);
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const next = Number(event.target.value);
+    if (!Number.isNaN(next)) updateValue(next);
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const next = Number(event.target.value);
+    if (!Number.isNaN(next)) updateValue(next);
+  };
+
+  const inputRow = showInput ? (
     <div className="space-y-1">
       <div className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-4">
         <Label htmlFor={inputId} className="text-xs uppercase tracking-wide text-muted-foreground">
@@ -71,12 +78,12 @@ export function LeverageSlider({
         <Input
           id={inputId}
           type="number"
-          min={inputMin}
-          max={inputMax}
-          step={inputStep}
+          min={min}
+          max={max}
+          step={step}
           placeholder={inputPlaceholder}
-          value={inputValue}
-          onChange={onInputChange}
+          value={value}
+          onChange={handleInputChange}
           disabled={disabled}
           className={cn("h-8 w-24 text-right sm:h-9", inputClassName)}
         />
@@ -92,22 +99,22 @@ export function LeverageSlider({
           type="button"
           variant="ghost"
           size="icon"
-          onClick={() => onAdjust?.(-0.1)}
-          disabled={disabled || !onAdjust}
+          onClick={() => handleAdjust(-effectiveAdjustStep)}
+          disabled={disabled}
           className="h-9 w-9 rounded-full border border-muted-foreground/40 bg-background text-primary hover:bg-accent sm:h-10 sm:w-10"
         >
           <HiMinusSm className="size-4" />
         </Button>
         <div className="flex-1 text-center">
-          <p className="text-xs uppercase tracking-wide text-muted-foreground">{title}</p>
-          <p className="text-xl font-semibold sm:text-2xl">{display}</p>
+          <p className="text-xs uppercase tracking-wide text-muted-foreground">Leverage</p>
+          <p className="text-xl font-semibold sm:text-2xl">{value}x</p>
         </div>
         <Button
           type="button"
           variant="ghost"
           size="icon"
-          onClick={() => onAdjust?.(0.1)}
-          disabled={disabled || !onAdjust}
+          onClick={() => handleAdjust(effectiveAdjustStep)}
+          disabled={disabled}
           className="h-9 w-9 rounded-full border border-muted-foreground/40 bg-background text-primary hover:bg-accent sm:h-10 sm:w-10"
         >
           <HiPlusSm className="size-4" />
@@ -118,8 +125,8 @@ export function LeverageSlider({
         min={min}
         max={max}
         step={step}
-        value={sliderValue}
-        onChange={onSliderChange}
+        value={value}
+        onChange={handleSliderChange}
         disabled={disabled}
         className="w-full accent-primary"
       />
