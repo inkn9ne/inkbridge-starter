@@ -3,6 +3,8 @@ export { CompatibilityBar } from "./components/compatibility-bar/compatibility-b
 export { DemoSection } from "./components/demo/demo-section";
 export { HowItWorksSection } from "./components/how-it-works";
 export { IncludedSection } from "./components/included/included-section";
+export { StructureSection } from "./components/structure/structure-section";
+export { StarterCtaSection } from "./components/starter-cta/starter-cta-section";
 export { FeaturesSection } from "./components/features";
 export { ComparisonTable } from "./components/comparison-table";
 export { StarterBanner } from "./components/starter-banner/starter-banner";

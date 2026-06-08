@@ -111,8 +111,8 @@ export default async function ComponentDocPage({
         </p>
         <ol className="flex flex-col gap-3">
           {c.stories.map((s, i) => (
-            <li key={s} className="flex gap-4">
-              <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">
+            <li key={s} className="flex items-center gap-4">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold text-muted-foreground">
                 {i + 1}
               </span>
               <p className="text-sm font-medium text-foreground">{s}</p>

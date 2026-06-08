@@ -3,9 +3,8 @@ import {
   HeroSection,
   CompatibilityBar,
   IncludedSection,
-  HowItWorksSection,
-  FaqSection,
-  CtaSection,
+  StructureSection,
+  StarterCtaSection,
 } from "@/feature/marketing";
 
 export const metadata: Metadata = {
@@ -20,9 +19,8 @@ export default function Home() {
       <HeroSection />
       <CompatibilityBar />
       <IncludedSection />
-      <HowItWorksSection />
-      <FaqSection />
-      <CtaSection />
+      <StructureSection />
+      <StarterCtaSection />
     </>
   );
 }
