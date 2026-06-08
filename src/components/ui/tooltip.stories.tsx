@@ -4,6 +4,7 @@ import { Button } from "./button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip"
 
 const meta: Meta<typeof Tooltip> = {
+  title: "Components/UI/Tooltip",
   component: Tooltip,
 }
 export default meta

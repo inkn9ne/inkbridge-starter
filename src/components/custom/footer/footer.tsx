@@ -16,16 +16,15 @@ export function Footer() {
               <h3 className="text-sm font-semibold text-foreground">Product</h3>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground">
-                    Features
+                  <Link href="/docs" className="text-sm text-muted-foreground hover:text-foreground">
+                    Components
                   </Link>
                 </li>
                 <li>
-                  <Link href="#pricing" className="text-sm text-muted-foreground hover:text-foreground">
-                    Pricing
+                  <Link href="/#included" className="text-sm text-muted-foreground hover:text-foreground">
+                    What&apos;s included
                   </Link>
                 </li>
-
               </ul>
             </div>
             <div>

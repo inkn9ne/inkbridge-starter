@@ -24,7 +24,6 @@ Detected story files:
 - `src/components/ui/breadcrumb.stories.tsx`
 - `src/components/ui/pagination.stories.tsx`
 - `src/components/ui/sonner.stories.tsx`
-- `src/components/gradient-showcase/gradient-showcase.stories.tsx`
 
 Current coverage summary:
 - Atoms: `Button`, `Badge`, `Input`, `Alert`, `Checkbox`, `Switch`, `RadioGroup`, `Separator`, `Label`
@@ -33,7 +32,6 @@ Current coverage summary:
 - Forms: `Select`
 - Data: `Table`
 - Overlay/portal patterns: `Tooltip`, `Popover`, `Dialog`, `Sheet`
-- Utility/demo: `GradientShowcase`
 
 Components added (no stories yet):
 - `Sonner` (Toast) — `src/components/ui/sonner.tsx`

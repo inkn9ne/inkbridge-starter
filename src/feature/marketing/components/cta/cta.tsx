@@ -14,8 +14,8 @@ export function CtaSection() {
             in minutes. No credit card required.
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
-            <Link href="/get-started">
-              <Button variant="secondary">Get started free</Button>
+            <Link href="/docs">
+              <Button variant="secondary">Browse components</Button>
             </Link>
             <a
               href="https://github.com/inkn9ne/inkbridge-starter"
