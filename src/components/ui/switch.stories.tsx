@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Switch } from "./switch"
 
 const meta: Meta<typeof Switch> = {
+  title: "Components/UI/Switch",
   component: Switch,
 }
 export default meta

@@ -5,6 +5,7 @@ import { Input } from "./input"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 
 const meta: Meta<typeof Popover> = {
+  title: "Components/UI/Popover",
   component: Popover,
 }
 export default meta

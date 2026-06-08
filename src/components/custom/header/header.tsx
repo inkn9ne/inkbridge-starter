@@ -1,5 +1,5 @@
-import { MobileNav } from "@/components/mobile-nav";
-import { NavBar } from "@/components/navbar";
+import { MobileNav } from "@/components/custom/mobile-nav";
+import { NavBar } from "@/components/custom/navbar";
 
 export function Header() {
   return (

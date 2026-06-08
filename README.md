@@ -10,6 +10,9 @@ A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](h
 - **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
 - **Multi-theme tokens** — `default` (green primary) and `secondary` (blue primary) themes in [`src/app/globals.css`](src/app/globals.css), demonstrating theme switching in Storybook and the Figma plugin's theme-selector preflight panel
 - **Perps feature module** — three connected components (slider + two modals) showing how a feature surface composes shadcn primitives into something realistic
+- **In-app component catalogue** — a `/docs` route (hub + per-component pages) generated from your stories at build time, plus a marketing home that doubles as an overview
+
+Components live in two buckets: `src/components/ui/` (vendored shadcn primitives) and `src/components/custom/` (your own shared components); feature surfaces stay under `src/feature/<feature>/`.
 
 ## Components
 
@@ -86,7 +89,7 @@ The plugin scans your Storybook stories and builds a "Design System" page with a
 
 ## Adding your own components
 
-1. Create a component in `src/components/ui/` (primitive) or `src/feature/<feature>/components/` (feature surface)
+1. Create a component in `src/components/ui/` (shadcn primitive), `src/components/custom/<name>/` (your own shared component) or `src/feature/<feature>/components/` (feature surface)
 2. Add a `.stories.tsx` file alongside it — args-only stories work great, the scanner inlines the component body
 3. Re-run **Generate Design System Page** — it incrementally updates only what changed
 

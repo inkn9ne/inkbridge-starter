@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Hero } from "@/components/hero";
+import { Hero } from "@/components/custom/hero";
 
 export function HeroSection() {
   return (
@@ -9,7 +9,7 @@ export function HeroSection() {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             Tailwind v4 · Next.js · Storybook{" "}
-            <a href="/docs/getting-started" className="font-semibold text-primary">
+            <a href="/docs" className="font-semibold text-primary">
               <span aria-hidden="true" className="absolute inset-0" />
               Get started <span aria-hidden="true">&rarr;</span>
             </a>
@@ -25,8 +25,8 @@ export function HeroSection() {
             Inkbridge scans your Tailwind components and Storybook stories, reads your design tokens, and builds a complete design system page in Figma — automatically.
           </p>
           <div className="mt-4 flex items-center justify-center gap-x-6">
-            <Link href="/get-started">
-              <Button>Get started free</Button>
+            <Link href="/docs">
+              <Button>Browse components</Button>
             </Link>
             <Link
               href="/docs"

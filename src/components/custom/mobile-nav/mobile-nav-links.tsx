@@ -6,14 +6,13 @@ import { SheetClose } from "@/components/ui/sheet";
 
 const NAV_LINKS = [
   { href: "/", label: "Home", description: "Back to the homepage" },
-  { href: "/docs", label: "Docs", description: "Guides, features, and references" },
-  { href: "/pricing", label: "Pricing", description: "Free and Pro plans" },
+  { href: "/docs", label: "Components", description: "The full component catalogue" },
 ];
 
 const QUICK_LINKS = [
-  { href: "/docs/getting-started", label: "Getting started" },
-  { href: "/docs/storybook-stories", label: "Storybook stories" },
-  { href: "/docs/dev-server-connection", label: "Dev server setup" },
+  { href: "/docs/button", label: "Button" },
+  { href: "/docs/card", label: "Card" },
+  { href: "/docs/leverage-slider", label: "LeverageSlider" },
 ];
 
 export function MobileNavLinks() {
