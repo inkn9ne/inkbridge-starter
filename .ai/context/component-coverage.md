@@ -40,7 +40,6 @@ Components added (no stories yet):
 - `Label` — `src/components/ui/label.tsx`
 - `ScrollArea` — `src/components/ui/scroll-area.tsx`
 - `Drawer` — `src/components/ui/drawer.tsx`
-- `InfoCard` — `src/components/ui/info-card.tsx`
 
 ## Target coverage (UI-library baseline)
 
@@ -103,7 +102,6 @@ Optional (for known risky components):
 - [ ] ScrollArea — component added, stories missing
 - [ ] Chart — component added, stories missing
 - [ ] Form — component added, stories missing
-- [ ] InfoCard — component added, stories missing
 
 **Phase 3 — pending**
 - [ ] FormRow/FieldGroup

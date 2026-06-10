@@ -31,7 +31,7 @@ Delivered:
 - [x] DropdownMenu (bonus)
 - [x] Accordion, Breadcrumb, Pagination, Separator (bonus)
 - [x] Toast (Sonner)
-- [ ] Drawer, ScrollArea, Chart, Form, InfoCard — components exist, stories pending
+- [ ] Drawer, ScrollArea, Chart, Form — components exist, stories pending
 
 Add stress stories:
 - portal-open states
