@@ -47,3 +47,6 @@ storybook-static
 .inkbridge/
 **/component-definitions.json
 **/component-definitions.debug.json
+
+# Local Claude Code skill installs (symlinked/copied from local sibling checkouts)
+.claude/skills/
