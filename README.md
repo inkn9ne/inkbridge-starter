@@ -1,6 +1,6 @@
 # Inkbridge Starter
 
-A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.io). Ships with a full shadcn/ui v4 build (27 primitives) plus a real-world Perps feature module — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial feature components, not just isolated primitives.
+A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.io). Ships with the full shadcn/ui v4 primitive set plus three real-world feature modules — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial, composed components, not just isolated primitives.
 
 ## What's included
 
@@ -9,37 +9,31 @@ A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](h
 - **Storybook** with stories for every component
 - **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
 - **Multi-theme tokens** — `default` (green primary) and `secondary` (blue primary) themes in [`src/app/globals.css`](src/app/globals.css), demonstrating theme switching in Storybook and the Figma plugin's theme-selector preflight panel
-- **Perps feature module** — three connected components (slider + two modals) showing how a feature surface composes shadcn primitives into something realistic
+- **Three feature modules** — `docs`, `marketing`, and `perps` under `src/feature/`, showing how Inkbridge handles composed feature surfaces, not just isolated primitives
 - **In-app component catalogue** — a `/docs` route (hub + per-component pages with live previews) generated from your stories at build time, plus a marketing home that doubles as an overview
-
-Components live in two buckets: `src/components/ui/` (vendored shadcn primitives) and `src/components/custom/` (your own shared components); feature surfaces stay under `src/feature/<feature>/`.
 
 ## Components
 
-### UI primitives (`src/components/ui/`)
+Components live in three buckets:
 
-shadcn/ui v4 — all 27 primitives with stories. Inkbridge classifies each into its rendering strategy automatically (CVA variant set, compound, state-machine, or simple).
+- **`src/components/ui/`** — the full shadcn/ui v4 primitive set (Forms, Display, Feedback, Overlays, Navigation, Data viz)
+- **`src/components/custom/`** — your own shared components
+- **`src/feature/<feature>/`** — feature surfaces
 
-| Category | Components |
-|---|---|
-| Forms | Button, Input, Label, Checkbox, RadioGroup, Switch, Select, Form |
-| Display | Badge, Card, Separator, Table |
-| Feedback | Alert, Sonner (toasts) |
-| Overlays | Dialog, Drawer, Sheet, Popover, Tooltip, DropdownMenu |
-| Navigation | Breadcrumb, Pagination, Tabs, Accordion, ScrollArea |
-| Data viz | Chart |
+No need to enumerate them here — every component with a story shows up in the in-app catalogue at **`/docs`** and in **Storybook**, with live previews. Inkbridge auto-classifies each into its rendering strategy (CVA variant set, compound, state-machine, or simple).
 
-### Perps feature module (`src/feature/perps/`)
+### Feature modules
 
-A realistic feature surface ported from a production perpetuals trading app. Demonstrates how Inkbridge handles consumer-side composition — feature components that wrap shadcn primitives, share a domain layer (types + constants + utility helpers), and live in their own colocated folder.
+This starter ships three, each colocated under `src/feature/<feature>/`:
 
-| Component | Stories | Plugin features exercised |
-|---|---|---|
-| LeverageSlider | Default, WithMarks, Disabled | Native `<input type="range">` rewrite, plugin-driven icon registry, react-icons inside an args-only story |
-| DecreasePositionModal | Default, EntirePositionToggled, NoPositionSelected | Dialog portal, Select with dynamic items via `.map()`, conditional sub-tree, sibling-button flex row constraints |
-| IncreasePositionModal | OpenLong, OpenShort, IncreaseExistingLong, InsufficientBalance, PreviewLoading, Disconnected | Embedded LeverageSlider, inline SVG icons, gradient submit button, multi-state preview pane, `<form>` width chain |
+- **`docs`** — the in-app component catalogue (the `/docs` hub + per-component pages). Its `CatalogList` renders the linked component index you browse.
+- **`marketing`** — the landing surface: hero, features, FAQ, comparison, and CTA sections, composed from primitives.
+- **`perps`** — a perpetuals trading surface ported from a production app, sharing a domain layer (`types` + `constants` + `utils`):
+  - **LeverageSlider** — dual-mode range control (native slider + −/+ buttons + synced number input)
+  - **DecreasePositionModal** — Dialog portal, Select with dynamic `.map()` items, conditional sub-tree
+  - **IncreasePositionModal** — embedded LeverageSlider, multi-state preview pane, gradient submit
 
-Layout convention: `src/feature/<feature>/{types,constants,utils}.ts` + `src/feature/<feature>/components/*.{tsx,stories.tsx}` — copy this shape when adding your own feature module.
+Convention: `src/feature/<feature>/{types,constants,utils}.ts` + `components/*.{tsx,stories.tsx}` — copy this shape for your own module.
 
 ---
 
