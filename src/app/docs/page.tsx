@@ -35,6 +35,16 @@ const QUICK_START = [
     title: "Generate the design system",
     body: <>Run Inkbridge → Generate Design System Page to render every story as a Figma frame.</>,
   },
+  {
+    title: "Ask your AI agent",
+    body: (
+      <>
+        The read-only Inkbridge MCP server is pre-wired in{" "}
+        <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">.mcp.json</code> — agents
+        discover your components and tokens before writing code.
+      </>
+    ),
+  },
 ];
 
 export default function DocsPage() {
@@ -71,7 +81,7 @@ export default function DocsPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
           Quick start
         </h2>
-        <ol className="mt-4 grid gap-6 sm:grid-cols-3">
+        <ol className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {QUICK_START.map((step, i) => (
             <li key={step.title} className="flex flex-col gap-2">
               <span className="flex size-7 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
