@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "inkbridge": {
+      "command": "npx",
+      "args": ["inkbridge", "mcp"]
+    }
+  }
+}
