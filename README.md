@@ -1,6 +1,8 @@
 # Inkbridge Starter
 
-A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.io). Ships with the full shadcn/ui v4 primitive set plus three real-world feature modules — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial, composed components, not just isolated primitives.
+A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.ink). Ships with the full shadcn/ui v4 primitive set plus three real-world feature modules — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial, composed components, not just isolated primitives.
+
+Prefer Material UI? The same starter exists as a 1:1 MUI port: [inkbridge-mui-starter](https://github.com/inkn9ne/inkbridge-mui-starter) — Next.js 16 + Material UI v9 + Storybook, no Tailwind, scanned by the same plugin.
 
 ## What's included
 
@@ -8,6 +10,7 @@ A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](h
 - **Tailwind CSS v4** + the full shadcn/ui v4 component set
 - **Storybook** with stories for every component
 - **Inkbridge** pre-wired — scanner route, token patch route, and scripts ready to go
+- **MCP server** registered in a committed `.mcp.json` — AI agents in this repo read the design-system model out of the box
 - **Multi-theme tokens** — `default` (green primary) and `secondary` (blue primary) themes in [`src/app/globals.css`](src/app/globals.css), demonstrating theme switching in Storybook and the Figma plugin's theme-selector preflight panel
 - **Three feature modules** — `docs`, `marketing`, and `perps` under `src/feature/`, showing how Inkbridge handles composed feature surfaces, not just isolated primitives
 - **In-app component catalogue** — a `/docs` route (hub + per-component pages with live previews) generated from your stories at build time, plus a marketing home that doubles as an overview
@@ -87,7 +90,13 @@ The plugin scans your Storybook stories and builds a "Design System" page with a
 2. Add a `.stories.tsx` file alongside it — args-only stories work great, the scanner inlines the component body
 3. Re-run **Generate Design System Page** — it incrementally updates only what changed
 
-See the [Inkbridge docs](https://inkbridge-868059678832.us-central1.run.app/docs) for full documentation, including the conventions for layouts, responsive previews, state matrices, and CVA variant detection.
+See the [Inkbridge docs](https://inkbridge.ink/docs) for full documentation, including the conventions for layouts, responsive previews, state matrices, and CVA variant detection.
+
+---
+
+## AI agents (MCP)
+
+This repo ships a committed [`.mcp.json`](.mcp.json) that registers the Inkbridge MCP server, so MCP-capable agents (Claude Code, Cursor, …) can read the design-system model without any setup — components, variant axes, and design tokens, straight from the scanner. The server runs locally over stdio via `npx inkbridge mcp` and is read-only; tools: `list_components`, `get_component`, `get_tokens`, `check_conformance` (agents verify their generated code against your tokens before presenting it), `scan`, `get_capabilities`. (`inkbridge setup` writes this file automatically in your own projects.)
 
 ---
 

@@ -37,12 +37,12 @@ export function Footer() {
               <h3 className="text-sm font-semibold text-foreground">Inkbridge</h3>
               <ul className="mt-4 space-y-3">
                 <li>
-                  <a href="https://inkbridge.io" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://inkbridge.ink" className="text-sm text-muted-foreground hover:text-foreground">
                     Product site
                   </a>
                 </li>
                 <li>
-                  <a href="https://inkbridge.io/docs" className="text-sm text-muted-foreground hover:text-foreground">
+                  <a href="https://inkbridge.ink/docs" className="text-sm text-muted-foreground hover:text-foreground">
                     Plugin docs
                   </a>
                 </li>

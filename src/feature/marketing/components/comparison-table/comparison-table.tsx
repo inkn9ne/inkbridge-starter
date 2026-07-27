@@ -4,8 +4,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 export interface Feature {
   name: string;
   description?: string;
-  free: boolean;
-  pro: boolean;
+  included: boolean;
 }
 
 export interface ComparisonTableProps {
@@ -16,44 +15,32 @@ const defaultFeatures: Feature[] = [
   {
     name: "Design System Page",
     description: "Generate complete design system documentation",
-    free: true,
-    pro: true,
+    included: true,
   },
   {
     name: "Component Scanning",
     description: "Scan React components from your codebase",
-    free: true,
-    pro: true,
+    included: true,
   },
   {
-    name: "Basic Tokens",
+    name: "Design Tokens",
     description: "Colors, typography, and spacing tokens",
-    free: true,
-    pro: true,
+    included: true,
   },
   {
-    name: "All Theme Variants",
+    name: "Theme Variants",
     description: "Support for multiple color themes",
-    free: false,
-    pro: true,
+    included: true,
   },
   {
     name: "GitHub PR Integration",
     description: "Create PRs directly from Figma",
-    free: false,
-    pro: true,
+    included: true,
   },
   {
-    name: "Component Sync",
-    description: "Two-way sync between code and Figma",
-    free: false,
-    pro: true,
-  },
-  {
-    name: "Priority Support",
-    description: "Direct access to the development team",
-    free: false,
-    pro: true,
+    name: "MCP Server",
+    description: "AI agents read your design-system model",
+    included: true,
   },
 ];
 
@@ -81,9 +68,8 @@ export function ComparisonTable({
       <CardHeader className="border-b bg-muted/50 p-0">
         <div className="flex items-center px-6 py-4">
           <p className="flex-1 text-base font-semibold">Features</p>
-          <p className="w-20 text-center text-base font-semibold">Free</p>
           <p className="w-20 text-center text-base font-semibold text-primary">
-            Pro
+            Included
           </p>
         </div>
       </CardHeader>
@@ -100,10 +86,7 @@ export function ComparisonTable({
                 )}
               </div>
               <div className="flex w-20 justify-center">
-                {feature.free ? <FeatureIncluded /> : <FeatureNotIncluded />}
-              </div>
-              <div className="flex w-20 justify-center">
-                {feature.pro ? <FeatureIncluded /> : <FeatureNotIncluded />}
+                {feature.included ? <FeatureIncluded /> : <FeatureNotIncluded />}
               </div>
             </li>
           ))}

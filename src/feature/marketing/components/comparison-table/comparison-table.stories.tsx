@@ -10,7 +10,7 @@ const meta: Meta<typeof ComparisonTable> = {
     docs: {
       description: {
         component:
-          "Feature comparison table showing Free vs Pro tier capabilities. Used on pricing and features pages.",
+          "Feature overview table — everything ships in the free plugin. Used on features pages.",
       },
     },
   },
@@ -30,19 +30,16 @@ type Story = StoryObj<typeof ComparisonTable>;
 // Minimal feature set for simpler story variant
 const minimalFeatures: Feature[] = [
   {
-    name: "Basic Export",
-    free: true,
-    pro: true,
+    name: "Design System Page",
+    included: true,
   },
   {
-    name: "Advanced Export",
-    free: false,
-    pro: true,
+    name: "Component Scanning",
+    included: true,
   },
   {
-    name: "Team Collaboration",
-    free: false,
-    pro: true,
+    name: "Structural Component Sync",
+    included: false,
   },
 ];
 

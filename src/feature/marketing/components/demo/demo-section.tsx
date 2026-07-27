@@ -306,11 +306,11 @@ export function DemoSection() {
               {[
                 {
                   title: "Edit in Figma Variables",
-                  desc: "Change a token value directly in Figma — no DTCG JSON editing required.",
+                  desc: "Change a token value directly in Figma — no JSON editing required.",
                 },
                 {
                   title: "Preview the diff",
-                  desc: "Inkbridge shows exactly which Tailwind config lines will change before anything is committed.",
+                  desc: "Inkbridge shows exactly which CSS custom properties in your token CSS will change before anything is committed.",
                 },
                 {
                   title: "Open a pull request",

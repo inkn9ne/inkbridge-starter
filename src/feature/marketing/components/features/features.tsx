@@ -37,14 +37,14 @@ export function FeaturesSection() {
             Everything you need
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            From Figma tokens to production-ready Tailwind code — without the
+            From Figma tokens to production-ready code — without the
             manual work.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <FeatureCard
             title="Token Export"
-            description="Extract colors, typography, and spacing directly from Figma Variables into your Tailwind config."
+            description="Extract colors, typography, and spacing directly from Figma Variables into your CSS design tokens — pushed back as reviewable PRs."
           >
             <HiColorSwatch className="h-5 w-5" />
           </FeatureCard>

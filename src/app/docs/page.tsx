@@ -68,7 +68,7 @@ export default function DocsPage() {
           from those stories at build time — the same artifact the Inkbridge plugin
           renders into Figma. Looking for how the plugin itself works?{" "}
           <a
-            href="https://inkbridge.io/docs"
+            href="https://inkbridge.ink/docs"
             className="font-medium text-primary underline-offset-4 hover:underline"
           >
             Read the Inkbridge docs →

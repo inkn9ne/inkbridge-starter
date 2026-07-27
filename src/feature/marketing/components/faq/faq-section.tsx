@@ -8,7 +8,7 @@ import {
 const FAQS = [
   {
     q: "What Figma plan do I need?",
-    a: "Inkbridge works with any Figma plan, including the free tier. You just need the ability to install plugins from the Figma Community.",
+    a: "Inkbridge works with any Figma plan, including the free tier. You need Figma Desktop — the plugin loads locally from node_modules via Import plugin from manifest, no Figma Community install involved.",
   },
   {
     q: "Do I need Storybook?",
@@ -16,7 +16,7 @@ const FAQS = [
   },
   {
     q: "Which versions of Tailwind are supported?",
-    a: "Both Tailwind v3 and v4 are supported. The plugin reads your existing Tailwind config (or CSS variables in v4) and maps them to Figma Variables automatically.",
+    a: "Tailwind CSS v4 — the version this starter runs. The plugin reads your CSS-defined tokens (the `@theme` block / CSS custom properties) and maps them to Figma Variables automatically.",
   },
   {
     q: "Will it overwrite my existing Figma designs?",
@@ -24,19 +24,19 @@ const FAQS = [
   },
   {
     q: "How does it handle custom design tokens?",
-    a: "The plugin reads token values directly from your configured source mode (`auto`, `css`, or `dtcg`) and syncs them into Figma Variables. In `auto`, CSS wins and DTCG is fallback. Push to Code then creates a PR with the token changes.",
+    a: "The plugin reads token values from your configured source mode — `auto` (default), `css`, or `mui` — and syncs them into Figma Variables. In `auto` it detects your stack: CSS custom properties for Tailwind projects like this starter, theme.ts for MUI. `dtcg` remains as a deprecated legacy mode. Push to Code then creates a PR with the token changes.",
   },
   {
     q: "What happens to generated frames when my code changes?",
-    a: 'Re-running "Generate Design System Page" regenerates all frames from the latest version of your components. Previous frames on the Design System page are replaced.',
+    a: 'Re-running "Generate Design System Page" updates only what moved — a preflight panel shows which components are new or changed, and unchanged frames are preserved along with their comments and manual positioning.',
   },
   {
     q: "Does it work with component libraries like shadcn/ui?",
     a: "Yes. Any React component that renders with Tailwind classes and has a Storybook story will be picked up. shadcn/ui, Radix-based libraries, and custom components all work.",
   },
   {
-    q: "What's the difference between Free and Pro?",
-    a: "The Free plan includes full component scanning, design token export, and single-file Figma generation — everything you need to get started. Pro unlocks multi-mode Figma Variables, GitHub PR integration, priority support, and higher component limits. See the full comparison on the pricing page.",
+    q: "How much does it cost?",
+    a: "Inkbridge is free. Component scanning, token export, Figma generation, the GitHub PR round-trip, and the MCP server all ship in the free plugin — no account, no license key.",
   },
   {
     q: "Is there a self-hosted or on-premise option?",

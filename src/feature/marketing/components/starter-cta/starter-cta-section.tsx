@@ -19,7 +19,7 @@ export function StarterCtaSection() {
             <Button>Browse components</Button>
           </Link>
           <a
-            href="https://inkbridge.io/docs"
+            href="https://inkbridge.ink/docs"
             className="text-sm font-semibold text-primary transition-colors hover:text-primary/80"
           >
             Read the Inkbridge docs →

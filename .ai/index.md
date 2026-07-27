@@ -22,6 +22,7 @@
 
 ## Cross-repo coordination
 
-Update both repos when needed:
+Update the sibling repos when needed:
 - `inkbridge-starter` (this repo): component inventory, stories, starter UX docs
 - `inkbridge` (sibling repo): scanner/render logic, plugin UX and architecture
+- `inkbridge-mui-starter` (sibling repo): 1:1 MUI port of this starter — copy, structure, and marketing changes here must be mirrored there (see its `AGENTS.md` port doctrine)

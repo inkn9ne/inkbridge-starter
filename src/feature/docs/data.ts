@@ -307,7 +307,7 @@ export const META: Record<string, ComponentMeta> = {
     related: ["hero-section"],
   },
   "comparison-table": {
-    description: "Free vs Pro feature comparison table.",
+    description: "Feature overview table with included-state icons.",
     pluginFeatures: ["Table layout chain", "Icon registry (check / cross)"],
     related: ["features-section"],
   },
