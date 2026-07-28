@@ -1,0 +1,7 @@
+{
+  "componentPaths": [
+    "src"
+  ],
+  "exclude": ["stories", "storybook-static"],
+  "onlyWithStories": true
+}
