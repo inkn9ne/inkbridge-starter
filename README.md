@@ -2,7 +2,7 @@
 
 A Next.js 16 + Tailwind v4 + Storybook project pre-configured with [Inkbridge](https://inkbridge.ink). Ships with the full shadcn/ui v4 primitive set plus three real-world feature modules — so you can generate a pixel-accurate design system in Figma in minutes and see how Inkbridge handles non-trivial, composed components, not just isolated primitives.
 
-Prefer Material UI? The same starter exists as a 1:1 MUI port: [inkbridge-mui-starter](https://github.com/inkn9ne/inkbridge-mui-starter) — Next.js 16 + Material UI v9 + Storybook, no Tailwind, scanned by the same plugin.
+Prefer Material UI? There's a Material UI version of this starter: [inkbridge-mui-starter](https://github.com/inkn9ne/inkbridge-mui-starter) — Next.js 16 + Material UI v9 + Storybook, no Tailwind, scanned by the same plugin.
 
 ## What's included
 
